@@ -10,18 +10,21 @@
 template<typename T>
 class HashTable {
 public:
-    explicit HashTable(int size = 11); 
+    explicit HashTable(int hashTableSize = 11); 
     bool contains(const T& obj) const;
     bool insert(const T& obj);
     bool remove(const T& obj);
     void makeEmpty();
+    int getSize() const;
 
 private:
     std::vector<std::list<T>> hashTable;
-    int size;
+    int size; 
 
     void rehash();
     size_t hashFunction(const T& obj) const;
+
+    // some functions to test for prime and get the next prime
 
 };
 
@@ -44,7 +47,7 @@ size_t HashTable<T>::hashFunction(const T& obj) const {
  * Post:
  */ 
 template<typename T>
-HashTable<T>::HashTable(int size) {
+HashTable<T>::HashTable(int hashTableSize ) {
 
 }
 
@@ -81,6 +84,24 @@ bool HashTable<T>::remove(const T& obj) {
  */ 
 template<typename T>
 void HashTable<T>::makeEmpty() {
+
+}
+
+/**
+ * Pre:
+ * Post:
+ */ 
+template<typename T>
+int HashTable<T>::getSize() const {
+
+}
+
+/**
+ * Pre:
+ * Post:
+ */ 
+template<typename T>
+void HashTable<T>::rehash() {
 
 }
 
