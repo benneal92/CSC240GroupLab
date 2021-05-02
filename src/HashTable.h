@@ -35,8 +35,8 @@ private:
  * 
  * Pre: HashTable is initialized and T has Hash functor implemented
  * Post: size_t representing hashed index is returned. State of Hashtable is unchanged
- * Data Members:
- * Member Functions:
+ * Data Members: hashTable
+ * Member Functions: N/A
  */ 
 template<typename T>
 size_t HashTable<T>::hashFunction(const T& obj) const {
