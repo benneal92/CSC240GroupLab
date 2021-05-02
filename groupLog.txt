@@ -26,4 +26,4 @@ Setup structure for classes HashTable Hash
 
 05/02/2021 
 Setup rough draft of README.md
-isPrime and nextPrime - Ben
+isPrime and nextPrime - Ben Neal
