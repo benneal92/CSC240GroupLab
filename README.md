@@ -48,8 +48,9 @@ getSize will return a constant integer value for the number of objects currently
 
 
 
-## Contributing
+## Contributing Members
 
+Ben Neal
 
 
 ## License
