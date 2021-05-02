@@ -2,11 +2,16 @@ Todo:
 
 Iterator - Benjamin Liden
 Rehash - Benjamin Liden
+insert - Benjamin Liden
 
 BirthdayObj - Erin Middlemas
 getItem - Erin Middlemas
+contains - Erin Middlemas
+
 
 Obj2 - Noura Almasri
+getSize - Noura Almasri
+makeEmpty - Noura Almasri
 isPrime and nextPrime - Ben
 
 Done:
