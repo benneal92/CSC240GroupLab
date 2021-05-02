@@ -122,10 +122,10 @@ void HashTable<T>::rehash() {
 }
 
 /**
- * Pre:
- * Post:
- * Data Members:
- * Member Functions:
+ * Pre: HashTable is initialized
+ * Post: returns prime number or throws exception. State of HashTable is not changed
+ * Data Members: N/A
+ * Member Functions: isPrime
  */ 
 template<typename T>
 int HashTable<T>::nextPrime(int num) {
@@ -137,10 +137,10 @@ int HashTable<T>::nextPrime(int num) {
 }
 
 /**
- * Pre:
- * Post:
- * Data Members:
- * Member Functions:
+ * Pre: HashTable is initialized
+ * Post: returns true if number is prime and false otherwise
+ * Data Members: N/A
+ * Member Functions: N/A
  */  
 template<typename T>
 bool HashTable<T>::isPrime(int num) {
