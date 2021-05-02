@@ -12,6 +12,7 @@ contains - Erin Middlemas
 Obj2 - Noura Almasri
 getSize - Noura Almasri
 makeEmpty - Noura Almasri
+
 isPrime and nextPrime - Ben
 
 Done:
