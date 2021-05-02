@@ -13,7 +13,6 @@ Obj2 - Noura Almasri
 getSize - Noura Almasri
 makeEmpty - Noura Almasri
 
-isPrime and nextPrime - Ben
 
 Done:
 04/20/2021 
@@ -27,3 +26,4 @@ Setup structure for classes HashTable Hash
 
 05/02/2021 
 Setup rough draft of README.md
+isPrime and nextPrime - Ben
