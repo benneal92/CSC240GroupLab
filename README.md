@@ -17,7 +17,7 @@ The goal of the project is to create a Hash Table that can handle different obje
 
 ### explicit HashTable(int hashTableSize = 11); 
 
-The constructor of the class is marked as explicit to ensure that mo implicit conversions take place during intialization of the object. It has a default parameter set to the prime number 11. This parameter can be supplied by the client and if not prime will be set to the next prime greater than the supplied number.
+The constructor of the class is marked as explicit to ensure that no implicit conversions take place during intialization of the object. It has a default parameter set to the prime number 11. This parameter can be supplied by the client and if not prime will be set to the next prime greater than the supplied number.
 
 
 ### bool contains(const T& obj) const;
