@@ -23,8 +23,8 @@ private:
 
     void rehash();
     size_t hashFunction(const T& obj) const;
-
-    // some functions to test for prime and get the next prime
+    int nextPrime(int num);
+    bool isPrime(int num);
 
 };
 
@@ -51,7 +51,7 @@ size_t HashTable<T>::hashFunction(const T& obj) const {
  * Member Functions:
  */ 
 template<typename T>
-HashTable<T>::HashTable(int hashTableSize ) {
+HashTable<T>::HashTable(int hashTableSize) {
 
 }
 
@@ -119,6 +119,45 @@ int HashTable<T>::getSize() const {
 template<typename T>
 void HashTable<T>::rehash() {
 
+}
+
+/**
+ * Pre:
+ * Post:
+ * Data Members:
+ * Member Functions:
+ */ 
+template<typename T>
+int HashTable<T>::nextPrime(int num) {
+    while(++num < INT_MAX) 
+        if(isPrime(num))
+            return num;
+    
+    throw std::overflow_error("overflow: nextPrime greater than INT_MAX");
+}
+
+/**
+ * Pre:
+ * Post:
+ * Data Members:
+ * Member Functions:
+ */  
+template<typename T>
+bool HashTable<T>::isPrime(int num) {
+    if(num == 2)
+        return true;
+
+    if(num % 2 == 0 || num < 3)    
+        return false;
+
+    int sqrtOfNum = std::sqrt(num);
+
+    for(int i = 3; i <= sqrtOfNum; i += 2) {
+        if(num % i == 0)
+            return false;
+    }       
+
+    return true;
 }
 
 #endif /* HASHTABLE_H */
