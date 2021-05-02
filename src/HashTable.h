@@ -3,9 +3,11 @@
 
 #include <vector>
 #include <list>
-#include <cstddef>  // size_t
+#include <cstddef>
+#include <climits>
+#include <cmath> 
 
-#include "Hash.h" // functor
+#include "Hash.h" 
 
 template<typename T>
 class HashTable {
@@ -17,6 +19,7 @@ public:
     void makeEmpty();
     int getSize() const;
 
+    
 private:
     std::vector<std::list<T>> hashTable;
     int size; 
@@ -29,10 +32,6 @@ private:
 };
 
 /**
- * hashFunction takes an T obj and initializes a functor of T type
- * 
- * myHF is a functor and it does the hashing
- * 
  * Pre: HashTable is initialized and T has Hash functor implemented
  * Post: size_t representing hashed index is returned. State of Hashtable is unchanged
  * Data Members: hashTable
@@ -152,11 +151,10 @@ bool HashTable<T>::isPrime(int num) {
 
     int sqrtOfNum = std::sqrt(num);
 
-    for(int i = 3; i <= sqrtOfNum; i += 2) {
+    for(int i = 3; i <= sqrtOfNum; i += 2)
         if(num % i == 0)
             return false;
-    }       
-
+    
     return true;
 }
 
