@@ -35,6 +35,8 @@ private:
  * 
  * Pre: HashTable is initialized and T has Hash functor implemented
  * Post: size_t representing hashed index is returned. State of Hashtable is unchanged
+ * Data Members:
+ * Member Functions:
  */ 
 template<typename T>
 size_t HashTable<T>::hashFunction(const T& obj) const {
@@ -45,6 +47,8 @@ size_t HashTable<T>::hashFunction(const T& obj) const {
 /**
  * Pre:
  * Post:
+ * Data Members:
+ * Member Functions:
  */ 
 template<typename T>
 HashTable<T>::HashTable(int hashTableSize ) {
@@ -54,6 +58,8 @@ HashTable<T>::HashTable(int hashTableSize ) {
 /**
  * Pre:
  * Post:
+ * Data Members:
+ * Member Functions:
  */ 
 template<typename T>
 bool HashTable<T>::contains(const T& obj) const {
@@ -63,6 +69,8 @@ bool HashTable<T>::contains(const T& obj) const {
 /**
  * Pre:
  * Post:
+ * Data Members:
+ * Member Functions:
  */ 
 template<typename T>
 bool HashTable<T>::insert(const T& obj) {
@@ -72,6 +80,8 @@ bool HashTable<T>::insert(const T& obj) {
 /**
  * Pre:
  * Post:
+ * Data Members:
+ * Member Functions:
  */ 
 template<typename T>
 bool HashTable<T>::remove(const T& obj) {
@@ -81,6 +91,8 @@ bool HashTable<T>::remove(const T& obj) {
 /**
  * Pre:
  * Post:
+ * Data Members:
+ * Member Functions:
  */ 
 template<typename T>
 void HashTable<T>::makeEmpty() {
@@ -90,6 +102,8 @@ void HashTable<T>::makeEmpty() {
 /**
  * Pre:
  * Post:
+ * Data Members:
+ * Member Functions:
  */ 
 template<typename T>
 int HashTable<T>::getSize() const {
@@ -99,6 +113,8 @@ int HashTable<T>::getSize() const {
 /**
  * Pre:
  * Post:
+ * Data Members:
+ * Member Functions:
  */ 
 template<typename T>
 void HashTable<T>::rehash() {
