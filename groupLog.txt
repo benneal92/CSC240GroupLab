@@ -25,3 +25,7 @@ Setup structure for classes HashTable Hash
 Setup rough draft of README.md
 Zoom meeting between team
 isPrime and nextPrime - Ben Neal
+
+05/03/2021
+Ben Neal and Erin discussed issues with getItem method for hashtable- Zoom Meeting
+

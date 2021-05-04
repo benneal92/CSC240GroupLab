@@ -63,6 +63,14 @@ HashTable<T>::HashTable(int hashTableSize) {
 template<typename T>
 bool HashTable<T>::contains(const T& obj) const {
 
+	T found_obj;
+	auto location = hashTable[hashFunction(obj)];
+	found_obj = std::find(location.begin(),location.end(), obj);
+	if(found_obj != location.end()){
+		return true;
+	}
+	else
+		return false;
 }
 
 /**
