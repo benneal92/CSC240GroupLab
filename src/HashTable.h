@@ -55,15 +55,14 @@ HashTable<T>::HashTable(int hashTableSize) {
 }
 
 /**
- * Pre:
- * Post:
- * Data Members:
- * Member Functions:
+ * Pre:HashTable is initialized
+ * Post: returns whether object is in or not in the table
+ * Data Members: hashTable
+ * Member Functions: hashFunction
  */ 
 template<typename T>
 bool HashTable<T>::contains(const T& obj) const {
-
-	auto found_obj;
+    auto found_obj = false;
 	auto location = hashTable[hashFunction(obj)];
 	found_obj = std::find(location.begin(),location.end(), obj);
 	if(found_obj != location.end()){
