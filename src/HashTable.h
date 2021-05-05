@@ -102,9 +102,9 @@ bool HashTable<T>::remove(const T& obj) {
  */ 
 template<typename T>
 void HashTable<T>::makeEmpty() {
-currentSize = 0;
-for(int i = 0; i<array.size();i++){
-	array[i].info = Empty; 
+size = 0;
+for(int i = 0; i<hashTable.size();i++){
+	 hashTable.clear(); 
 }
 }
 /**
