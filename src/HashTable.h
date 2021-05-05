@@ -95,27 +95,27 @@ bool HashTable<T>::remove(const T& obj) {
 }
 
 /**
- * Pre:List has been initialized
- * Post:The list is empty
- * Data Members:
- * Member Functions:Makes the list Empty
+ * Pre:List has been initialized.
+ * Post:The list is empty.
+ * Data Members:hashtable, size.
+ * Member Functions:Makes the list Empty.
  */ 
 template<typename T>
 void HashTable<T>::makeEmpty() {
-size = 0;
-for(int i = 0; i<hashTable.size();i++){
+   size = 0;
+   for(int i = 0; i<hashTable.size();i++){
 	 hashTable.clear(); 
-}
+   }
 }
 /**
  * Pre:
  * Post:
- * Data Members:
+ * Data Members:size
  * Member Functions:
  */ 
 template<typename T>
 int HashTable<T>::getSize() const {
-return size;
+	return size;
 }
 
 /**
