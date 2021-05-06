@@ -1,20 +1,28 @@
+
+
 #include "Car.h"
 using namespace std;
 
-Car::Car(int YearOfModel,std::string Makeby, int spd,std::string model ){
-	YearModel = YearOfModel;
-	Make = brand;
-	speed = spd;
-	model = type;
+Car::Car(int yearModel, int speed, std::string model, std::string brand)
+: yearModel{yearModel}, speed{speed}, model{model}, brand{brand}
+{ }
 
+int Car::getYearModel() const{
+	return yearModel;
 }
-int Car::getYearModel()const{
-	return YearModel;
 
-}
-int Car::getSpeed()const{
+int Car::getSpeed() const{
 	return speed;
 }
-bool Car::operator==(const Car &car1, const Car &car2){
-	return(car1.Make == car2.Make && car1.Model == car2.Model);
+
+std::string Car::getModel() const {
+	return model;
+}
+
+std::string Car::getBrand() const {
+	return brand;
+}
+
+bool Car::operator==(const Car& other){
+	return (brand == other.brand && model == other.model);
 }

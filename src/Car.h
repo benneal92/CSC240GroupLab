@@ -6,9 +6,11 @@
 class Car{
 
 public:
-	Car(int,std::string, int,std::string);
-	int getYearModel()const;
-	int getSpeed()const;
+	Car(int, int, std::string, std::string);
+	int getYearModel() const;
+	int getSpeed() const;
+	std::string getModel() const;
+	std::string getBrand() const;
 	bool operator==(const Car&);
 
 private:
@@ -16,12 +18,13 @@ private:
 	int speed;
 	std::string brand;
 	std::string model;
+
 };
+
 template<>
 class Hash<Car> {
 public:
-	size_t operator()(const Car &car1, const &car2) {
-
+	size_t operator()(const Car& car) {
 		std::string hashString = car.getModel() + car.getBrand()
 				+ std::to_string(car.getYearModel());
 
@@ -32,7 +35,6 @@ public:
 
 		return hashVal;
 	}
-
 };
 
 #endif
