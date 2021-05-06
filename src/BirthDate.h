@@ -27,13 +27,13 @@ public:
     BirthDate(); // Default Constructor
     BirthDate(std::string first_name, int newMonth, int newDay, int newYear);
     BirthDate(const BirthDate & anotherBirthDate); //copy constructor
-    int GetMonth() const;							// returns year
-    int GetYear() const;							// returns month
-    int GetDay() const;							// returns day
-    int GetAge() const;
-    int CalcDayOfYear();
-    std::string GetMonthAsString() const;					// returns month as a string
-    std::string GetName() const;
+    int getMonth() const;							// returns year
+    int getYear() const;							// returns month
+    int getDay() const;							// returns day
+    int getAge() const;
+    int calcDayOfYear();
+    std::string getMonthAsString() const;					// returns month as a string
+    std::string getName() const;
     bool operator== (const BirthDate & obj) const;		// overloading == operator
     bool operator!= (const BirthDate & obj) const;		// overloading != operator
     size_t getDayOfYear();
@@ -43,8 +43,8 @@ public:
 
 
 private:
-    int CalculateAge();
-    int BirthDayInDays();
+    int calculateAge();
+    int birthDayInDays();
 
     int year;
     int month;
@@ -111,9 +111,9 @@ BirthDate::BirthDate(std::string first_name, int newMonth, int newDay, int newYe
 	month = newMonth;
 	year = newYear; //Birthday is always
 	name = first_name;
-	birthdayDays = BirthDayInDays();
-	age = CalculateAge();
-	DayOfYear = CalcDayOfYear();
+	birthdayDays = birthDayInDays();
+	age = calculateAge();
+	DayOfYear = calcDayOfYear();
 
 }
 
@@ -124,7 +124,7 @@ BirthDate::BirthDate(std::string first_name, int newMonth, int newDay, int newYe
  * Data Members:
  * Member Functions:
  */
-int BirthDate::BirthDayInDays(){
+int BirthDate::birthDayInDays(){
 	//Assume date is 05/31/2021
 
 	int daysSinceBirthDay = 0;
@@ -148,7 +148,7 @@ int BirthDate::BirthDayInDays(){
  * Data Members:
  * Member Functions:
  */
-int BirthDate::CalculateAge(){
+int BirthDate::calculateAge(){
 	//Assume date is 05/31/2021
 
 
@@ -167,7 +167,7 @@ int BirthDate::CalculateAge(){
  * Data Members:
  * Member Functions:
  */
-int BirthDate::CalcDayOfYear(){
+int BirthDate::calcDayOfYear(){
 
 	int daysInYear=0;
 
@@ -189,7 +189,7 @@ int BirthDate::CalcDayOfYear(){
  * Data Members:
  * Member Functions:
  */
-int BirthDate::GetMonth() const
+int BirthDate::getMonth() const
 // Accessor function for data member month.
 {
    return month;
@@ -202,7 +202,7 @@ int BirthDate::GetMonth() const
  * Data Members:
  * Member Functions:
  */
-std::string BirthDate::GetMonthAsString() const
+std::string BirthDate::getMonthAsString() const
 // Returns data member as a string
 {
   return conversionTable[month];
@@ -216,7 +216,7 @@ std::string BirthDate::GetMonthAsString() const
  * Data Members:
  * Member Functions:
  */
-int BirthDate::GetYear() const
+int BirthDate::getYear() const
 // Accessor function for data member year.
 {
   return year;
@@ -229,7 +229,7 @@ int BirthDate::GetYear() const
  * Data Members:
  * Member Functions:
  */
-int BirthDate::GetDay() const
+int BirthDate::getDay() const
 // Accessor function for data member day.
 {
   return day;
@@ -242,7 +242,7 @@ int BirthDate::GetDay() const
  * Data Members:
  * Member Functions:
  */
-int BirthDate::GetAge() const
+int BirthDate::getAge() const
 // Accessor function for data member day.
 {
   return age;
@@ -267,7 +267,7 @@ size_t BirthDate::getDayOfYear(){
  * Data Members:
  * Member Functions:
  */
-std::string BirthDate::GetName() const
+std::string BirthDate::getName() const
 // Accessor function for data member day.
 {
   return name;
@@ -282,7 +282,7 @@ std::string BirthDate::GetName() const
  */
 bool BirthDate::operator== (const BirthDate & obj) const
 		{
-			if((GetDay() == obj.GetDay()) and (GetMonth() == obj.GetMonth()) and (GetYear() == obj.GetYear())){
+			if((getDay() == obj.getDay()) and (getMonth() == obj.getMonth()) and (getYear() == obj.getYear())){
 				return true;
 			}
 			else
@@ -299,7 +299,7 @@ bool BirthDate::operator== (const BirthDate & obj) const
 bool BirthDate::operator!= (const BirthDate &obj) const{
 	{
 
-		if((GetDay() == obj.GetDay()) and (GetMonth() == obj.GetMonth()) and (GetYear() == obj.GetYear())){
+		if((getDay() == obj.getDay()) and (getMonth() == obj.getMonth()) and (getYear() == obj.getYear())){
 			return false;
 		}
 		else
@@ -337,9 +337,9 @@ BirthDate::BirthDate(const BirthDate & anotherBirthDate){
  */
 std::ostream& operator<<(std::ostream& out, const BirthDate &obj){
 
-	out << "Hi, my name is " << obj.GetName() << "!" ;
-	out << " My Birthday is "   << obj.GetMonth() << "/" << obj.GetDay() << "/" << obj.GetYear();
-	out << " and I am " << obj.GetAge() << " years old." << std::endl;
+	out << "Hi, my name is " << obj.getName() << "!" ;
+	out << " My Birthday is "   << obj.getMonth() << "/" << obj.getDay() << "/" << obj.getYear();
+	out << " and I am " << obj.getAge() << " years old." << std::endl;
 
 }
 
