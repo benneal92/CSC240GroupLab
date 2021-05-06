@@ -3,11 +3,13 @@
 
 #include <vector>
 #include <list>
+#include <stack>
 #include <cstddef>
 #include <climits>
 #include <cmath> 
 
 #include "Hash.h" 
+#include "HashTableIterator.h"
 
 template<typename T>
 class HashTable {
@@ -18,8 +20,11 @@ public:
     bool remove(const T& obj);
     void makeEmpty();
     int getSize() const;
+    float loadFactor() const;
 
-    
+    HashTableIterator<T> begin();
+    HashTableIterator<T> end();
+
 private:
     std::vector<std::list<T>> hashTable;
     int size; 
@@ -28,7 +33,6 @@ private:
     size_t hashFunction(const T& obj) const;
     int nextPrime(int num);
     bool isPrime(int num);
-
 };
 
 /**
@@ -80,7 +84,7 @@ bool HashTable<T>::contains(const T& obj) const {
  */ 
 template<typename T>
 bool HashTable<T>::insert(const T& obj) {
-
+	return true; // placeholder
 }
 
 /**
@@ -91,7 +95,7 @@ bool HashTable<T>::insert(const T& obj) {
  */ 
 template<typename T>
 bool HashTable<T>::remove(const T& obj) {
-
+	return true; // placeholder
 }
 
 /**
@@ -126,7 +130,70 @@ int HashTable<T>::getSize() const {
  */ 
 template<typename T>
 void HashTable<T>::rehash() {
+	// construct new hashTable
+    std::vector<std::list<T>> newHashTable;
 
+    // figure out next prime after doubling
+    int newSize = 0;
+    try {
+    	newSize = this->nextPrime(this->size * 2);
+    } catch (std::overflow_error& e) {
+    	newSize = this->size; // what's a better fallback in this case? just below INT_MAX?
+    }
+
+    // resize to new doubled data structure
+    newHashTable.resize(newSize);
+
+    // rehash all items
+    for (auto row : this->hashTable) {
+    	for (auto item : row) {
+    		int hash = item.hash() % newSize;
+    		// this will preserve the order if any of these stay in similar buckets
+    		newHashTable[hash].push_back(item);
+    	}
+    }
+
+    // finally, delete old table and point to new table
+    delete this->hashTable; // I don't need to do this manually, do I?
+    this->hashTable = newHashTable;
+}
+
+/**
+ * Pre: The table is initialized
+ * Post: The table will not change. The load factor will be returned.
+ * Data Members:
+ * Member Functions:
+ */
+template<typename T>
+float HashTable<T>::loadFactor() const {
+	if (size <= 0) {
+		// can't divide by zero
+		return 0;
+	}
+	// calculate N (total items in table) / M (number of slots)
+	int sum = 0;
+	for (auto row : this->hashTable)
+		sum += row.size;
+	return ((float) sum / this->size);
+}
+
+template<typename T>
+HashTableIterator<T> HashTable<T>::begin(){
+	for (auto row : this->hashTable){
+		if (!row.empty()) {
+			// does this make any sense?
+			return HashTableIterator<T>{ row.front() };
+		}
+	}
+}
+
+template<typename T>
+HashTableIterator<T> HashTable<T>::end(){
+//	 return HashTableIterator<T> { hashTable.back().end() } // rearmost element
+
+	// need to do a bit more reading on how to do this properly
+
+	return HashTableIterator<T>{}; // this will keep the compiler quiet :)
 }
 
 /**

@@ -89,9 +89,9 @@ BirthDate::BirthDate(){
 	month = rand() % 12 + 1;
 	name = randomNames[rand() % 30];
 	year = rand() % (2021-1930) + 1920;
-	birthdayDays = BirthDayInDays();
-	age = CalculateAge();
-	DayOfYear = CalcDayOfYear();
+	birthdayDays = this->birthDayInDays();
+	age = this->calculateAge();
+	DayOfYear = this->calcDayOfYear();
 
 
 }
@@ -341,6 +341,7 @@ std::ostream& operator<<(std::ostream& out, const BirthDate &obj){
 	out << " My Birthday is "   << obj.getMonth() << "/" << obj.getDay() << "/" << obj.getYear();
 	out << " and I am " << obj.getAge() << " years old." << std::endl;
 
+	return out;
 }
 
 
