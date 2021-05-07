@@ -14,6 +14,7 @@
 
 #include <string>
 #include <chrono>
+#include <iostream>
 
 #include <cmath>
 #include "Hash.h"

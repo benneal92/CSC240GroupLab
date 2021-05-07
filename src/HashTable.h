@@ -6,7 +6,8 @@
 #include <stack>
 #include <cstddef>
 #include <climits>
-#include <cmath> 
+#include <cmath>
+#include <algorithm> 
 
 #include "Hash.h" 
 #include "HashTableIterator.h"
@@ -48,14 +49,22 @@ size_t HashTable<T>::hashFunction(const T& obj) const {
 }
 
 /**
- * Pre:
- * Post:
- * Data Members:
- * Member Functions:
+ * Pre: HashTable is not initialized
+ * Post: HashTable is initialized with prime number for table size
+ * Data Members: size, hashTable
+ * Member Functions: isPrime, nextPrime
  */ 
 template<typename T>
-HashTable<T>::HashTable(int hashTableSize) {
+HashTable<T>::HashTable(int hashTableSize) 
+: size{0}
+{
+    if(hashTableSize < 1)
+        throw std::underflow_error("Error Usage: HashTable size must be greater than 0");
 
+    if(isPrime(hashTableSize))
+        hashTable.resize(hashTableSize);
+    else
+        hashTable.resize(nextPrime(hashTableSize));    
 }
 
 /**
@@ -68,7 +77,7 @@ template<typename T>
 bool HashTable<T>::contains(const T& obj) const {
     auto found_obj = false;
     auto location = hashTable[hashFunction(obj)];
-    found_obj = std::find(location.begin(),location.end(), obj);
+    found_obj = std::find(location.begin(), location.end(), obj);
     if(found_obj != location.end()){
         return true;
     }
