@@ -1,23 +1,40 @@
 #ifndef CAR_H
 #define CAR_H
-#include "Hash.h"
+
+#include <iostream>
 #include <string>
 
-class Car{
+#include "Hash.h"
+#include "DriveStrategy.h"
 
+class Car {
 public:
-	Car(int, int, std::string, std::string);
-	int getYearModel() const;
+	Car(int, int, std::string, std::string, DriveStrategy* = nullptr);
+	Car(const Car&);
+	Car(Car&&) noexcept;
+	~Car();
+	Car& operator=(const Car&);
+	Car& operator=(Car&&) noexcept;
 	int getSpeed() const;
+	int getYearModel() const;
 	std::string getModel() const;
 	std::string getBrand() const;
+	void setSpeed(int);
+	void setYearModel(int);
+	void setBrandModel(std::string&, std::string&);
+	void setBrandModel(std::string&&, std::string&&);
+	void setDrive(DriveStrategy*);
 	bool operator==(const Car&);
+	bool operator!=(const Car&);
+	void performDrive() const;
+
+	friend std::ostream& operator<<(std::ostream& out, const Car& obj);
 
 private:
 	int yearModel;
 	int speed;
 	std::string model;
-	std::string brand;
+	DriveStrategy* drive;
 };
 
 template<>

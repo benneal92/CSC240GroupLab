@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <list>
-#include <stack>
 #include <cstddef>
 #include <climits>
 #include <cmath>
@@ -22,6 +21,7 @@ public:
     bool remove(const T& obj);
     void makeEmpty();
     int getSize() const;
+    bool isEmpty();
     float loadFactor() const;
 
     template<class U>
@@ -38,6 +38,7 @@ private:
     size_t hashFunction(const T& obj) const;
     int nextPrime(int num);
     bool isPrime(int num);
+
 };
 
 /**
@@ -72,7 +73,7 @@ HashTable<T>::HashTable(int hashTableSize)
 }
 
 /**
- * Pre:HashTable is initialized
+ * Pre: HashTable is initialized
  * Post: returns whether object is in or not in the table
  * Data Members: hashTable
  * Member Functions: hashFunction
@@ -142,19 +143,31 @@ bool HashTable<T>::remove(const T& obj) {
 template<typename T>
 void HashTable<T>::makeEmpty() {
    size = 0;
-   for(int i = 0; i<hashTable.size();i++){
+   for(int i = 0; i < hashTable.size(); i++){
 	 hashTable.clear(); 
    }
 }
+
 /**
- * Pre:
- * Post:
- * Data Members:size
- * Member Functions:
+ * Pre: HashTable is initialized
+ * Post: state is unchanged. Returns number of elements currently in the HashTable
+ * Data Members: size
+ * Member Functions: N/A
  */ 
 template<typename T>
 int HashTable<T>::getSize() const {
 	return size;
+}
+
+/**
+ * Pre: HashTable is initialized
+ * Post: state is unchanged. Returns true if size is zero and false otherwise
+ * Data Members: size 
+ * Member Functions: N/A
+ */ 
+template<typename T>
+bool HashTable<T>::isEmpty() {
+	return size == 0;
 }
 
 /**
