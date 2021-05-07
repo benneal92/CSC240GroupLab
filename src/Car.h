@@ -16,9 +16,8 @@ public:
 private:
 	int yearModel;
 	int speed;
-	std::string brand;
 	std::string model;
-
+	std::string brand;
 };
 
 template<>

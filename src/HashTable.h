@@ -8,6 +8,7 @@
 #include <climits>
 #include <cmath>
 #include <algorithm> 
+#include <iostream>
 
 #include "Hash.h" 
 #include "HashTableIterator.h"
@@ -22,6 +23,9 @@ public:
     void makeEmpty();
     int getSize() const;
     float loadFactor() const;
+
+    template<class U>
+    friend std::ostream& operator<<(std::ostream& out,  const HashTable<U>& ht);
 
     HashTableIterator<T> begin();
     HashTableIterator<T> end();
@@ -93,8 +97,14 @@ bool HashTable<T>::contains(const T& obj) const {
  */ 
 template<typename T>
 bool HashTable<T>::insert(const T& obj) {
-	int index = obj.hash();
-	return this->hashTable.at(0).push_front(obj);
+	size_t index = this->hashFunction(obj);
+	try {
+		this->hashTable.at(index).push_front(obj);
+		size += 1;
+		return true;
+	} catch (std::exception const& e) {
+		return false;
+	}
 }
 
 /**
@@ -108,15 +118,19 @@ bool HashTable<T>::insert(const T& obj) {
  */ 
 template<typename T>
 bool HashTable<T>::remove(const T& obj) {
-	bool removed = false;
+	int removed = 0;
 	// remove ALL items matching the description
-	for (auto row : this->hashTable) {
+	for (auto& row : this->hashTable) {
 		row.remove_if([&obj, &removed](T item){
-			item == obj;
-			removed = true;
+			bool match = item == obj;
+			if (match){
+				removed += 1;
+			}
+			return match;
 		});
 	}
-	return removed;
+	size -= removed;
+	return removed <= 0;
 }
 
 /**
@@ -168,7 +182,7 @@ void HashTable<T>::rehash() {
     // rehash all items
     for (auto row : this->hashTable) {
     	for (auto item : row) {
-    		int hash = item.hash() % newSize;
+    		int hash = this->hashFunction(item);
     		// this will preserve the order if any of these stay in similar buckets
     		newHashTable[hash].push_back(item);
     	}
@@ -187,15 +201,16 @@ void HashTable<T>::rehash() {
  */
 template<typename T>
 float HashTable<T>::loadFactor() const {
-	if (size <= 0) {
+	if (this->size <= 0) {
 		// can't divide by zero
 		return 0;
 	}
+	int numSlots = this->hashTable.size();
 	// calculate N (total items in table) / M (number of slots)
 	int sum = 0;
-	for (auto row : this->hashTable)
-		sum += row.size;
-	return ((float) sum / this->size);
+	for (auto& row : this->hashTable)
+		sum += row.size();
+	return static_cast<float>(sum) / numSlots;
 }
 
 template<typename T>
@@ -206,6 +221,29 @@ HashTableIterator<T> HashTable<T>::begin(){
 template<typename T>
 HashTableIterator<T> HashTable<T>::end(){
 	return HashTableIterator<T>{ this->hashTable, /* is end */ true };
+}
+
+template<typename U>
+std::ostream& operator<<(std::ostream& out, const HashTable<U> &ht){
+
+	/*
+	 	 This really doesn't work well for larger HashTables.
+	 	 Suggest we trim this a bit :)
+	 	 Although it'll break some tests...
+	 */
+
+	out << "HashTable [" << std::endl;
+	int rowIdx = 0;
+	for (auto row : ht.hashTable) {
+		out << rowIdx << ">> ";
+		for (auto col : row) {
+			out << col << ", ";
+		}
+		out << std::endl;
+		++rowIdx;
+	}
+	out << "] " << std::endl;
+	return out;
 }
 
 /**
