@@ -95,15 +95,15 @@ void testIterator() {
 	 This does not work at all.
 
 	 */
-	std::stringstream ss;
-	HashTable<int> ht;
-	for (int i = 0; i < 15; i++) {
-		ht.insert(i);
-	}
-	for (auto item : ht) {
-		ss << item;
-	}
-	std::cout << ss.str();
+//	std::stringstream ss;
+//	HashTable<int> ht;
+//	for (int i = 0; i < 15; i++) {
+//		ht.insert(i);
+//	}
+//	for (auto item : ht) {
+//		ss << item;
+//	}
+//	std::cout << ss.str();
 }
 
 /*
