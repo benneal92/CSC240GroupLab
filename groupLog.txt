@@ -31,3 +31,6 @@ Ben Neal and Erin discussed issues with getItem method for hashtable- Zoom Meeti
 05/05/2021 
 Ben, Ben, and Noura discussed clear(), Car object, and iterators
 Ben L. pushed new loadFactor member function, rehash, and some iterator work.
+
+05/05/2021
+Ben L: tests for insert, remove, loadFactor
