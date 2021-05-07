@@ -7,8 +7,6 @@ BirthdayObj - Erin Middlemas
 getItem - Erin Middlemas
 contains - Erin Middlemas
 
-Car - Noura Almasri
-
 
 Done:
 04/20/2021 
@@ -36,4 +34,4 @@ Ben L. pushed new loadFactor member function, rehash, and some iterator work.
 Ben L: tests for insert, remove, loadFactor
 
 05/07/2021
-Neal added rim spinners to the car class (Strategy Pattern for DriveBehavior)
+Neal and Noura added rim spinners to the car class (Strategy Pattern for DriveBehavior)
