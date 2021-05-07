@@ -34,3 +34,6 @@ Ben L. pushed new loadFactor member function, rehash, and some iterator work.
 
 05/05/2021
 Ben L: tests for insert, remove, loadFactor
+
+05/07/2021
+Neal added rim spinners to the car class (Strategy Pattern for DriveBehavior)
