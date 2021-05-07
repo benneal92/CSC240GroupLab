@@ -84,7 +84,8 @@ bool HashTable<T>::contains(const T& obj) const {
  */ 
 template<typename T>
 bool HashTable<T>::insert(const T& obj) {
-	return true; // placeholder
+	int index = obj.hash();
+	return this->hashTable.at(0).push_front(obj);
 }
 
 /**
@@ -92,10 +93,21 @@ bool HashTable<T>::insert(const T& obj) {
  * Post:
  * Data Members:
  * Member Functions:
+ *
+ * remove_if courtesy of: https://en.cppreference.com/w/cpp/container/list/remove
+ * lambda courtesy of: https://docs.microsoft.com/en-us/cpp/cpp/lambda-expressions-in-cpp
  */ 
 template<typename T>
 bool HashTable<T>::remove(const T& obj) {
-	return true; // placeholder
+	bool removed = false;
+	// remove ALL items matching the description
+	for (auto row : this->hashTable) {
+		row.remove_if([&obj, &removed](T item){
+			item == obj;
+			removed = true;
+		});
+	}
+	return removed;
 }
 
 /**
@@ -179,21 +191,12 @@ float HashTable<T>::loadFactor() const {
 
 template<typename T>
 HashTableIterator<T> HashTable<T>::begin(){
-	for (auto row : this->hashTable){
-		if (!row.empty()) {
-			// does this make any sense?
-			return HashTableIterator<T>{ row.front() };
-		}
-	}
+	return HashTableIterator<T> { this->hashTable, /* is end */ false};
 }
 
 template<typename T>
 HashTableIterator<T> HashTable<T>::end(){
-//	 return HashTableIterator<T> { hashTable.back().end() } // rearmost element
-
-	// need to do a bit more reading on how to do this properly
-
-	return HashTableIterator<T>{}; // this will keep the compiler quiet :)
+	return HashTableIterator<T>{ this->hashTable, /* is end */ true };
 }
 
 /**
