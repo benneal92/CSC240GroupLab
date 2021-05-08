@@ -32,15 +32,14 @@ public:
     int getYear() const;							// returns month
     int getDay() const;							// returns day
     int getAge() const;
-    int calcDayOfYear();
+    //size_t calcDayOfYear();
     std::string getMonthAsString() const;					// returns month as a string
     std::string getName() const;
     bool operator== (const BirthDate & obj) const;		// overloading == operator
     bool operator!= (const BirthDate & obj) const;		// overloading != operator
-    size_t getDayOfYear();
+    //size_t getDayOfYear();
 
     friend std::ostream& operator<<(std::ostream& out, const BirthDate &obj); //overload << operator
-
 
 
 private:
@@ -53,7 +52,7 @@ private:
     int age;
     std::string name;
     int birthdayDays;
-    size_t DayOfYear;	//how many days into the year is your birthday? Used for hash function
+    //size_t DayOfYear;	//how many days into the year is your birthday? Used for hash function
 
 
 
@@ -73,7 +72,9 @@ static std::string conversionTable[] = {"Error", "January", "February",
 static std::string randomNames[] = {"Viva", "Terrence", "Eusebla", "Cristie", "Linnie", "Mercy", "Chase", "Bennie", "Diego", "Rosaria", "Cayla",
 								"Sherril", "Matilde", "Wendell", "Lucas", "Ardath", "Myrna", "Luciana","Alexa", "Matthew", "Lavinia",
 								"Brunilda","Sofia", "Isabella", "Tianna", "Rosy", "Kirstie", "Isaac", "Lyndon", "Ashley", "Amanda",
-								"George", "James", "Lyndon", "Chanel", "Marva","Autumn", "Elsa", "Tyler", "Luke", "Jake"};
+								"George", "James", "Lyndon", "Chanel", "Marva","Autumn", "Elsa", "Tyler", "Luke", "Jake", "Julian", "Bernice", "Domingo"
+								"Freddie", "Kay", "Hilda", "Courtney", "Arnold", "Wendell", "Rosalie", "Wayne", "Danielle", "Alex", "Camillia", "Kevin",
+								"Joe", "Charles", "Chance", "Olivia", "Torrin", "Kathryn", "Naoko", "Maura", "Hannah", "Nolan"};
 
 
 
@@ -86,13 +87,14 @@ static std::string randomNames[] = {"Viva", "Terrence", "Eusebla", "Cristie", "L
  */
 BirthDate::BirthDate(){
 
-	day = rand() % daysInMonth[month] + 1;
 	month = rand() % 12 + 1;
+	day = rand() % daysInMonth[month] + 1;
+
 	name = randomNames[rand() % 30];
 	year = rand() % (2021-1930) + 1920;
 	birthdayDays = this->birthDayInDays();
 	age = this->calculateAge();
-	DayOfYear = this->calcDayOfYear();
+	//DayOfYear = this->calcDayOfYear();
 
 
 }
@@ -114,7 +116,7 @@ BirthDate::BirthDate(std::string first_name, int newMonth, int newDay, int newYe
 	name = first_name;
 	birthdayDays = birthDayInDays();
 	age = calculateAge();
-	DayOfYear = calcDayOfYear();
+	//DayOfYear = calcDayOfYear();
 
 }
 
@@ -168,20 +170,20 @@ int BirthDate::calculateAge(){
  * Data Members:
  * Member Functions:
  */
-int BirthDate::calcDayOfYear(){
-
-	int daysInYear=0;
-
-	for(int i = 0;i <month;i++){
-
-
-		daysInYear += daysInMonth[i];
-
-	}
-
-	daysInYear += day;
-	return daysInYear;
-}
+//size_t BirthDate::calcDayOfYear(){
+//
+//	int daysInYear=0;
+//
+//	for(int i = 0;i <month;i++){
+//
+//
+//		daysInYear += daysInMonth[i];
+//
+//	}
+//
+//	daysInYear += day;
+//	return daysInYear;
+//}
 
 
 /**
@@ -256,10 +258,10 @@ int BirthDate::getAge() const
  * Data Members:
  * Member Functions:
  */
-size_t BirthDate::getDayOfYear(){
-
-	return DayOfYear;
-}
+//size_t BirthDate::getDayOfYear(){
+//
+//	return DayOfYear;
+//}
 
 
 /**
@@ -323,7 +325,7 @@ BirthDate::BirthDate(const BirthDate & anotherBirthDate){
 	birthdayDays = anotherBirthDate.birthdayDays;
 	name = anotherBirthDate.name;
 	age = anotherBirthDate.age;
-	DayOfYear = anotherBirthDate.DayOfYear;
+	//DayOfYear = anotherBirthDate.DayOfYear;
 
 
 
@@ -345,17 +347,34 @@ std::ostream& operator<<(std::ostream& out, const BirthDate &obj){
 	return out;
 }
 
+size_t calcDayOfYear(const BirthDate& obj){
 
+	int daysInYear=0;
+
+	for(int i = 0;i <obj.getMonth();i++){
+
+
+		daysInYear += daysInMonth[i];
+
+	}
+
+	daysInYear += obj.getDay();
+	return daysInYear;
+}
 
 //Just going to return the number of days in a year, or hash to decade
 template<>
-class std::hash<BirthDate>
+class Hash<BirthDate>
 {
 public:
-	size_t operator() ( BirthDate &obj ) const
+	size_t operator() (const  BirthDate& obj ) const
 	{
+		size_t index = 0;
 
-		return (obj.getDayOfYear());
+		//index = (obj.getDayOfYear());
+		index = calcDayOfYear(obj);
+		return index;
+		std::cout << "index being returned: " << index << std::endl;
 	}
 
 

@@ -23,7 +23,7 @@ public:
     int getSize() const;
     bool isEmpty();
     float loadFactor() const;
-
+    int findCollisions() const;
     template<class U>
     friend std::ostream& operator<<(std::ostream& out,  const HashTable<U>& ht);
 
@@ -33,7 +33,6 @@ public:
 private:
     std::vector<std::list<T>> hashTable;
     int size; 
-
     void rehash();
     size_t hashFunction(const T& obj) const;
     int nextPrime(int num);
@@ -80,14 +79,27 @@ HashTable<T>::HashTable(int hashTableSize)
  */ 
 template<typename T>
 bool HashTable<T>::contains(const T& obj) const {
-    auto found_obj = false;
+    //auto found_obj = false ;
     auto location = hashTable[hashFunction(obj)];
-    found_obj = std::find(location.begin(), location.end(), obj);
-    if(found_obj != location.end()){
-        return true;
-    }
-    else
-        return false;
+    return  (std::find(location.begin(), location.end(), obj) != location.end());
+//    if(found_obj != location.end()){
+//        return true;
+//    }
+//    else
+//        return false;
+}
+
+template<typename T>
+int HashTable<T>::findCollisions() const{
+	int collisions = 0;
+	for (auto row: this->hashTable){
+		//std::cout << row.size() << std::endl;
+		if(row.size()>1){
+			//std::cout << "collision!" <<std::endl;
+			collisions++;
+		}
+	}
+	return collisions;
 }
 
 /**
@@ -99,6 +111,7 @@ bool HashTable<T>::contains(const T& obj) const {
 template<typename T>
 bool HashTable<T>::insert(const T& obj) {
 	size_t index = this->hashFunction(obj);
+	//std::cout << index << std::endl;
 	try {
 		this->hashTable.at(index).push_front(obj);
 		size += 1;
