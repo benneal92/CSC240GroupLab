@@ -34,6 +34,7 @@ private:
 	int yearModel;
 	int speed;
 	std::string model;
+	std::string brand;
 	DriveStrategy* drive;
 };
 

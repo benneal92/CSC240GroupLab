@@ -6,6 +6,8 @@
  *
  *
  *  Warning: this has no testing behind it yet. Beware!
+ *
+ *  Using 'long long unsigned int' in this file so it compares cleanly to the std::{vector, list}.size() returns.
  */
 
 #ifndef SRC_HASHTABLEITERATOR_H_
@@ -19,9 +21,18 @@
 template<class T>
 class HashTableIterator {
 
-	struct coords {
-		int row;
-		int column;
+	class coords {
+	public:
+		long long unsigned int row;
+		long long unsigned int column;
+
+		bool operator==(const coords &incoming) const {
+			return (this->row == incoming.row)
+					&& (this->column == incoming.column);
+		}
+		bool operator!=(const coords &incoming) const {
+			return !(*this == incoming);
+		}
 	};
 
 public:
@@ -35,14 +46,15 @@ public:
 private:
 	std::vector<std::list<T>> hashTable;
 	coords endPosition;
+	T heldItem;
 };
 
 template<class T>
 HashTableIterator<T>::HashTableIterator(std::vector<std::list<T>> &ht, bool end) :
 		hashTable(ht) {
 	// last element of last row
-	int endRow = ht.size - 1;
-	int endCol = ht.at[endRow].size + 1; // this represents ONE past the end of the data
+	long long unsigned int endRow = ht.size() - 1;
+	long long unsigned int endCol = ht.at(endRow).size() + 1; // this represents ONE past the end of the data
 	this->endPosition = coords { endRow, endCol };
 
 	if (end) {
@@ -60,10 +72,11 @@ T& HashTableIterator<T>::operator*() {
 	auto row = this->hashTable.at(this->position.row);
 
 	// now, find column... it's clumsy, but std::list cannot be accessed by idx
-	int count = 0;
+	long long unsigned int count = 0;
 	for (auto item : row) {
 		if (count == this->position.column) {
-			return item;
+			this->heldItem = item;
+			return this->heldItem;
 		}
 		++count;
 	}
@@ -74,38 +87,60 @@ T& HashTableIterator<T>::operator*() {
 
 template<class T>
 HashTableIterator<T>& HashTableIterator<T>::operator++() {
+	auto isValid = [&](coords position) {
+		if (position.row >= hashTable.size()) {
+			return false;
+		}
+		std::list<T> row = hashTable.at(position.row);
+		// not empty at the row and column is within bounds
+		return !row.empty() && position.column < row.size();
+	};
 
 	// so, we want to find the next good item...
-	T item;
-	bool found;
-	while(!found && position != endPosition) {
-		bool columnAtEndOfRow = position.column == (hashTable.at(position.row).size - 1);
-		bool noMoreRows = position.row == (hashTable.size - 1);
-		bool notAtEndOfCurrentRow = position.column < hashTable.at(position.row).size;
+	// increment one step to start
+	position.column++;
+	while (!isValid(position)) {
+		bool columnAtEndOfRow;
+		bool noMoreRows;
+		bool notAtEndOfCurrentRow;
+		bool rowEmpty;
 
-		if (columnAtEndOfRow && noMoreRows) {
+		try {
+			columnAtEndOfRow = position.column
+					>= (hashTable.at(position.row).size());
+			noMoreRows = position.row == (hashTable.size());
+			notAtEndOfCurrentRow = position.column
+					< hashTable.at(position.row).size();
+			rowEmpty = hashTable.at(position.row).empty();
+		} catch (std::exception const& e) {
+			// if ANY error while assigning these, return end position
+			position = this->endPosition;
+			break;
+		}
+
+		if ((rowEmpty || columnAtEndOfRow) && noMoreRows) {
 			// if end of row and no more rows, set endPosition
 			position = this->endPosition;
-		} else if (columnAtEndOfRow /* and more rows exist */) {
+//			break;
+		} else if (rowEmpty || columnAtEndOfRow /* and more rows exist */) {
 			// if at end of row, move to next and reset column idx
-			position = coords { position.row, 0 };
-			continue;
+			position = coords { position.row + 1, 0 };
 		} else if (notAtEndOfCurrentRow) {
 			// happy path... get next column item in list
-			position = coords { position.row, position.column++ };
+			position = coords { position.row, position.column + 1 };
 		} else {
 			// this really shouldn't throw an error, but...
 			throw std::out_of_range("You've gone too far this time.");
 		}
 	}
 
-	return this;
+	return *this;
 }
 
 template<class T>
 bool HashTableIterator<T>::operator!=(const HashTableIterator<T> &it) const {
 	// just compare the positions
-	return this->position != it.position;
+	return position != it.position;
 }
 
 #endif /* SRC_HASHTABLEITERATOR_H_ */

@@ -19,7 +19,7 @@ int main() {
 	testInsert();
 	testRemove();
 	testLoadFactor();
-//	testIterator();
+	testIterator();
 	std::cout << "Tests ran finished without error 🍕" << std::endl;
 	return 0;
 }
@@ -90,20 +90,16 @@ void testLoadFactor() {
 }
 
 void testIterator() {
-	/*
-
-	 This does not work at all.
-
-	 */
-//	std::stringstream ss;
-//	HashTable<int> ht;
-//	for (int i = 0; i < 15; i++) {
-//		ht.insert(i);
-//	}
-//	for (auto item : ht) {
-//		ss << item;
-//	}
-//	std::cout << ss.str();
+	std::stringstream ss;
+	std::string check = R"(0,9,6,3,12,5,2,14,11,8,1,13,10,7,4,)";
+	HashTable<int> ht;
+	for (int i = 0; i < 15; i++) {
+		ht.insert(i);
+	}
+	for (auto& item : ht) {
+		ss << item << ',';
+	}
+	assert(check == ss.str());
 }
 
 /*
