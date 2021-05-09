@@ -103,10 +103,10 @@ int HashTable<T>::findCollisions() const{
 }
 
 /**
- * Pre:
- * Post:
- * Data Members:
- * Member Functions:
+ * Pre: The table is constructed.
+ * Post: The table may (see returned boolean) have the item inserted.
+ * Data Members: hashTable, size
+ * Member Functions: hashFunction
  */ 
 template<typename T>
 bool HashTable<T>::insert(const T& obj) {
@@ -122,10 +122,10 @@ bool HashTable<T>::insert(const T& obj) {
 }
 
 /**
- * Pre:
- * Post:
- * Data Members:
- * Member Functions:
+ * Pre: The table is initialized and has items inserted.
+ * Post: Any items matching the given item will be removed.
+ * Data Members: hashTable, size
+ * Member Functions: n/a
  *
  * remove_if courtesy of: https://en.cppreference.com/w/cpp/container/list/remove
  * lambda courtesy of: https://docs.microsoft.com/en-us/cpp/cpp/lambda-expressions-in-cpp
@@ -148,10 +148,10 @@ bool HashTable<T>::remove(const T& obj) {
 }
 
 /**
- * Pre:List has been initialized.
- * Post:The list is empty.
- * Data Members:hashtable, size.
- * Member Functions:Makes the list Empty.
+ * Pre: List has been initialized.
+ * Post: The list is empty.
+ * Data Members: hashTable, size.
+ * Member Functions: Makes the list Empty.
  */ 
 template<typename T>
 void HashTable<T>::makeEmpty() {
@@ -184,10 +184,10 @@ bool HashTable<T>::isEmpty() {
 }
 
 /**
- * Pre:
- * Post:
- * Data Members:
- * Member Functions:
+ * Pre: The table is initialized and items are loaded. Load factor may be above a threshold.
+ * Post: The table size is expanded and all items are hashed to new locations.
+ * Data Members: size, hashTable
+ * Member Functions: hashFunction
  */ 
 template<typename T>
 void HashTable<T>::rehash() {
@@ -222,7 +222,7 @@ void HashTable<T>::rehash() {
 /**
  * Pre: The table is initialized
  * Post: The table will not change. The load factor will be returned.
- * Data Members:
+ * Data Members: size, hashTable
  * Member Functions:
  */
 template<typename T>
@@ -239,16 +239,34 @@ float HashTable<T>::loadFactor() const {
 	return static_cast<float>(sum) / numSlots;
 }
 
+/**
+ * Pre: The table is initialized
+ * Post: The table will not change. An iterator pointing to the first element will be returned.
+ * Data Members: hashTable
+ * Member Functions:
+ */
 template<typename T>
 HashTableIterator<T> HashTable<T>::begin(){
 	return HashTableIterator<T> { this->hashTable, /* is end */ false};
 }
 
+/**
+ * Pre: The table is initialized
+ * Post: The table will not change. An iterator pointing to past the last element will be returned.
+ * Data Members: hashTable
+ * Member Functions:
+ */
 template<typename T>
 HashTableIterator<T> HashTable<T>::end(){
 	return HashTableIterator<T>{ this->hashTable, /* is end */ true };
 }
 
+/**
+ * Pre: The table is initialized
+ * Post: The table will not change. It will be pretty-printed to the out stream.
+ * Data Members: hashTable
+ * Member Functions:
+ */
 template<typename U>
 std::ostream& operator<<(std::ostream& out, const HashTable<U> &ht){
 

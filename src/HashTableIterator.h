@@ -1,14 +1,12 @@
+#ifndef SRC_HASHTABLEITERATOR_H_
+#define SRC_HASHTABLEITERATOR_H_
+
 /*
  * HashTableIterator.h
  *
  *  Created on: May 5, 2021
  *      Author: Benjamin Liden
- *
- *  Using 'long long unsigned int' in this file so it compares cleanly to the std::{vector, list}.size() returns.
  */
-
-#ifndef SRC_HASHTABLEITERATOR_H_
-#define SRC_HASHTABLEITERATOR_H_
 
 #include <utility>
 #include <vector>
@@ -17,8 +15,8 @@
 
 class coords {
 public:
-	long long unsigned int row;
-	long long unsigned int column;
+	long long unsigned int row;			/* Using 'long long unsigned int' in this file so it compares */
+	long long unsigned int column;		/* cleanly to the std::{vector, list}.size() returns. */
 
 	bool operator==(const coords &incoming) const {
 		return (this->row == incoming.row) && (this->column == incoming.column);
@@ -68,6 +66,12 @@ HashTableIterator<T>::HashTableIterator(std::vector<std::list<T>> &ht, bool end)
 
 }
 
+/*
+ * Pre: The iterator is initialized and points to a valid position.
+ * Post: The item at the iterator's position will be returned.
+ * Data Members: hashTable, position, heldItem
+ * Member Functions: n/a
+ */
 template<class T>
 T& HashTableIterator<T>::operator*() {
 	// get row
@@ -87,6 +91,12 @@ T& HashTableIterator<T>::operator*() {
 	throw std::out_of_range("You've gone too far this time.");
 }
 
+/*
+ * Pre: The iterator is initialized.
+ * Post: The iterator's position will be updated to the next _valid_ item.
+ * Data Members: position
+ * Member Functions: n/a
+ */
 template<class T>
 HashTableIterator<T>& HashTableIterator<T>::operator++() {
 	// increment one step to start
@@ -96,13 +106,21 @@ HashTableIterator<T>& HashTableIterator<T>::operator++() {
 	return *this;
 }
 
+
 template<class T>
 bool HashTableIterator<T>::operator!=(const HashTableIterator<T> &it) const {
 	// just compare the positions
 	return this->position != it.position;
 }
 
-// Is the given position valid and occupied?
+/*
+ * Is the given position valid and occupied?
+ *
+ * Pre: The iterator is initialized.
+ * Post: The iterator's current position will be checked for validity and return a boolean.
+ * Data Members: hashTable, position
+ * Member Functions: n/a
+ */
 template<class T>
 bool HashTableIterator<T>::isValidPosition() const {
 	if (this->position.row >= hashTable.size()) {
@@ -113,9 +131,13 @@ bool HashTableIterator<T>::isValidPosition() const {
 	return !row.empty() && this->position.column < row.size();
 }
 
-
 /*
  * Advance this->position to the next immediate step, regardless of validity.
+ *
+ * Pre: The iterator is initialized.
+ * Post: The iterator's current position will be moved to the next immediate slot.
+ * Data Members: hashTable, position, endPosition
+ * Member Functions: n/a
  */
 template<class T>
 coords HashTableIterator<T>::getNextPosition(coords const &position) const {
@@ -153,6 +175,11 @@ coords HashTableIterator<T>::getNextPosition(coords const &position) const {
 
 /*
  * Move current coords to next VALID position, inclusive of current position.
+ *
+ * Pre: The iterator is initialized.
+ * Post: The iterator's current position will be moved to the _valid_ slot.
+ * Data Members: position, endPosition
+ * Member Functions: getNextPosition, isValidPosition
  */
 template<class T>
 void HashTableIterator<T>::seekNextValidPosition() {
