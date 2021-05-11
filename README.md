@@ -96,7 +96,7 @@ In other implementations frequently the HashTable class will take two template a
 ## Contributing Members
 
 Ben Neal
-- Car class, prime validations, project setup
+- Car class, project setup
 
 Benjamin Liden
 - HashTable Iterator, HashTable Member Functions
