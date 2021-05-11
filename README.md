@@ -83,7 +83,7 @@ Depending on the object passed we can expect different behavior from our Car obj
 
 ## Birthday Paradox
 
-## Outcome of Project
+# Outcome of Project
 
 From the start of the assignment, we encouraged each member to make the success of the project a shared responsibility and a team effort. We created a discord server to communicate and frequently used Zoom to meet digitally. Every team member was responsive and helpful in each stage of the assignment. 
 
@@ -98,7 +98,7 @@ In our implementation of the Hash Table, the class only takes an object and then
 In other implementations frequently the HashTable class will take two template arguments for a key-value pair. The benefit is that searching and retrieving items are decoupled from the object itself.
 
 
-## Contributing Members
+# Contributing Members
 
 Ben Neal
 - Car class, Project Setup
