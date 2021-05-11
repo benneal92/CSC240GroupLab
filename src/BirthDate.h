@@ -97,8 +97,6 @@ BirthDate::BirthDate(){
 	year = rand() % (2021-1930) + 1920;
 	birthdayDays = this->birthDayInDays();
 	age = this->calculateAge();
-	//DayOfYear = this->calcDayOfYear();
-
 
 }
 
@@ -121,7 +119,6 @@ BirthDate::BirthDate(std::string first_name, int newMonth, int newDay, int newYe
 	name = first_name;
 	birthdayDays = birthDayInDays();
 	age = calculateAge();
-
 
 }
 
@@ -162,10 +159,7 @@ int BirthDate::birthDayInDays(){
 int BirthDate::calculateAge(){
 	//Assume date is 05/31/2021
 
-
 	int current_inDays = 31 + daysInMonth[1] + daysInMonth[2] + daysInMonth[3] + daysInMonth[4] + daysInMonth[5] + ((2021-1920)*365);
-
-
 
 	return (current_inDays - birthdayDays)/365;
 
@@ -184,7 +178,6 @@ int BirthDate::calculateAge(){
  * Member Functions:N/A
  */
 int BirthDate::getMonth() const
-// Accessor function for data member month.
 {
    return month;
 }
@@ -199,7 +192,6 @@ int BirthDate::getMonth() const
  * Member Functions:N/A
  */
 std::string BirthDate::getMonthAsString() const
-// Returns data member as a string
 {
   return conversionTable[month];
 }
@@ -215,7 +207,6 @@ std::string BirthDate::getMonthAsString() const
  * Member Functions:N/A
  */
 int BirthDate::getYear() const
-// Accessor function for data member year.
 {
   return year;
 }
@@ -230,7 +221,6 @@ int BirthDate::getYear() const
  * Member Functions:N/A
  */
 int BirthDate::getDay() const
-// Accessor function for data member day.
 {
   return day;
 }
@@ -245,7 +235,6 @@ int BirthDate::getDay() const
  * Member Functions:N/A
  */
 int BirthDate::getAge() const
-// Accessor function for data member day.
 {
   return age;
 }
@@ -261,7 +250,6 @@ int BirthDate::getAge() const
  * Member Functions:N/A
  */
 std::string BirthDate::getName() const
-// Accessor function for data member day.
 {
   return name;
 }
