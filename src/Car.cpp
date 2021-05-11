@@ -1,6 +1,7 @@
 #include "Car.h"
 
 #include <typeinfo>
+#include <string>
 
 /**
  * Pre: Car is not initialized
@@ -42,7 +43,8 @@ Car::Car(Car&& car) noexcept
  * Member Functions: N/A
  */ 
 Car::~Car(){
-	delete drive;
+	if(drive)
+		delete drive;
 	drive = nullptr;
 }
 
