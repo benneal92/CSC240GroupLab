@@ -57,7 +57,7 @@ getSize will return a constant integer value for the number of objects currently
 isEmpty will return true if the current number of items in the Hash Table is zero and false otherwise. The state of the Hash Table is not changed from this function call.
 
 
-## float loadFactor() const;
+### float loadFactor() const;
 
 Load Factor is important concept in Hash Tables and gives insight into how full the table has become. This function will return the Load Factor at any point it is called. The state of the Hash Table is not changed from this function call.
 
