@@ -50,7 +50,14 @@ int main() {
 
 	return 0;
 }
-
+/**
+ * Calculate the likelihood someone in a classroom with n students  has the same birthday.
+ *
+ * Pre:numberOfPeople given as input from the terminal
+ * Post:returns the actual probability calculated by the N choose K function and a simulated value utilizing the groups hash table separate chaining implementation
+ * Data Members: probability, actualProb, CollisionFound, HashTable ht, BirthDate person (reinitialized over and over again randomly)
+ * Member Functions:insert() (HashTable), findCollisions() (HashTable)
+ */
 void simulateBirthdayParadox(int numberOfPeople) {
 
 	srand(time(0));
@@ -59,7 +66,7 @@ void simulateBirthdayParadox(int numberOfPeople) {
 			- ((pow((364 / 365.0),
 					(numberOfPeople * (numberOfPeople - 1)) / 2.0)));
 	int CollisionFound = 0;
-	for (int i = 0; i <= 10000; i++) {
+	for (int i = 0; i <10000; i++) {
 		HashTable<BirthDate> ht(365);
 		for (int i = 0; i < numberOfPeople; i++) {
 			BirthDate person;

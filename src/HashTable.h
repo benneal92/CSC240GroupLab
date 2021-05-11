@@ -79,23 +79,24 @@ HashTable<T>::HashTable(int hashTableSize)
  */ 
 template<typename T>
 bool HashTable<T>::contains(const T& obj) const {
-    //auto found_obj = false ;
+
     auto location = hashTable[hashFunction(obj)];
     return  (std::find(location.begin(), location.end(), obj) != location.end());
-//    if(found_obj != location.end()){
-//        return true;
-//    }
-//    else
-//        return false;
+
 }
 
+
+/**
+ * Pre: HashTable is initialized.
+ * Post: returns how many collisions there are
+ * Data Members: hashTable
+ * Member Functions:  N/A
+ */
 template<typename T>
 int HashTable<T>::findCollisions() const{
 	int collisions = 0;
 	for (auto row: this->hashTable){
-		//std::cout << row.size() << std::endl;
 		if(row.size()>1){
-			//std::cout << "collision!" <<std::endl;
 			collisions++;
 		}
 	}
