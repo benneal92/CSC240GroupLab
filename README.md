@@ -68,7 +68,7 @@ In the strategy pattern, the car object has a DriveStrategy. DriveStrategy is an
 
 When we instantiate a car object we pass a pointer to particular concrete implementation. This passing of the object into our constructor function is known as dependency injection.
 
-Depending on the object passed we can expect different behavior from our Car object. This is an example of Polymorphis. The car object also has the necessary functions implemented to make it hashable and can be used with our separate chained Hash table data structure.
+Depending on the object passed we can expect different behavior from our Car object. This is an example of Polymorphism. The car object also has the necessary functions implemented to make it hashable and can be used with our separate chained Hash table data structure.
 
 
 ## Outcome of Project
