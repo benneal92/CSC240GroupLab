@@ -86,7 +86,7 @@ Depending on the object passed we can expect different behavior from our Car obj
 
 In a group of n people, what is the probability two people have the same birthday? People think that the chances of someone having the same birthday increase linearly with the amount of people, however this is not the case. The actual probability increases exponentially:
 
-1 - (364 &frasl; 365)<sup>n(n-1) %fras1 2</sup>
+1 - (364 &frasl; 365)<sup>n(n-1) %fras1; 2</sup>
 
 We can generalize the Birthday Paradox to hashing and the importance of dealing with collisions within a hashtable.Despite numbers having a random probability of occuring in a certain range, the probability that another number randomly generated will match that number is not a linear function. 
 
