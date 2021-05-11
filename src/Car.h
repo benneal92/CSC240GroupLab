@@ -28,20 +28,20 @@ public:
 	bool operator!=(const Car&);
 	void performDrive() const;
 
-	friend std::ostream& operator<<(std::ostream& out, const Car& obj);
+	friend std::ostream& operator<<(std::ostream &out, const Car &obj);
 
 private:
 	int yearModel;
 	int speed;
 	std::string model;
 	std::string brand;
-	DriveStrategy* drive;
+	DriveStrategy *drive;
 };
 
 template<>
 class Hash<Car> {
 public:
-	size_t operator()(const Car& car) {
+	size_t operator()(const Car &car) {
 		std::string hashString = car.getModel() + car.getBrand()
 				+ std::to_string(car.getYearModel());
 

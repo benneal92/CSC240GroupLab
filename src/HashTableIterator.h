@@ -15,8 +15,8 @@
 
 class coords {
 public:
-	long long unsigned int row;			/* Using 'long long unsigned int' in this file so it compares */
-	long long unsigned int column;		/* cleanly to the std::{vector, list}.size() returns. */
+	long long unsigned int row; /* Using 'long long unsigned int' in this file so it compares */
+	long long unsigned int column; /* cleanly to the std::{vector, list}.size() returns. */
 
 	bool operator==(const coords &incoming) const {
 		return (this->row == incoming.row) && (this->column == incoming.column);
@@ -106,7 +106,6 @@ HashTableIterator<T>& HashTableIterator<T>::operator++() {
 	return *this;
 }
 
-
 template<class T>
 bool HashTableIterator<T>::operator!=(const HashTableIterator<T> &it) const {
 	// just compare the positions
@@ -183,8 +182,7 @@ coords HashTableIterator<T>::getNextPosition(coords const &position) const {
  */
 template<class T>
 void HashTableIterator<T>::seekNextValidPosition() {
-	while (!isValidPosition()
-			&& this->position != this->endPosition) {
+	while (!isValidPosition() && this->position != this->endPosition) {
 		this->position = this->getNextPosition(this->position);
 	}
 }

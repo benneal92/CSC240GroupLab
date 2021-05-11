@@ -8,7 +8,6 @@
  */
 
 //Not using template here because data members will always be the same data type
-
 #ifndef SRC_BIRTHDATE_H_
 #define SRC_BIRTHDATE_H_
 
@@ -19,64 +18,57 @@
 #include <cmath>
 #include "Hash.h"
 
-
-
-class BirthDate
-{
+class BirthDate {
 public:
 
-    BirthDate(); // Default Constructor
-    BirthDate(std::string first_name, int newMonth, int newDay, int newYear);
-    BirthDate(const BirthDate & anotherBirthDate); //copy constructor
-    int getMonth() const;							// returns year
-    int getYear() const;							// returns month
-    int getDay() const;							// returns day
-    int getAge() const;
+	BirthDate(); // Default Constructor
+	BirthDate(std::string first_name, int newMonth, int newDay, int newYear);
+	BirthDate(const BirthDate &anotherBirthDate); //copy constructor
+	int getMonth() const;							// returns year
+	int getYear() const;							// returns month
+	int getDay() const;							// returns day
+	int getAge() const;
 
-    std::string getMonthAsString() const;					// returns month as a string
-    std::string getName() const;
-    bool operator== (const BirthDate & obj) const;		// overloading == operator
-    bool operator!= (const BirthDate & obj) const;		// overloading != operator
+	std::string getMonthAsString() const;			// returns month as a string
+	std::string getName() const;
+	bool operator==(const BirthDate &obj) const;	// overloading == operator
+	bool operator!=(const BirthDate &obj) const;	// overloading != operator
 
-
-    friend std::ostream& operator<<(std::ostream& out, const BirthDate &obj); //overload << operator
-
+	friend std::ostream& operator<<(std::ostream &out, const BirthDate &obj); //overload << operator
 
 private:
-    int calculateAge();
-    int birthDayInDays();
+	int calculateAge();
+	int birthDayInDays();
 
-    int year;
-    int month;
-    int day;
-    int age;
-    std::string name;
-    int birthdayDays; // What day in the year is your birthday
-
+	int year;
+	int month;
+	int day;
+	int age;
+	std::string name;
+	int birthdayDays; // What day in the year is your birthday
 
 };
 
-
 // Number of days in each month
-static int daysInMonth[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30,
-                            31, 30, 31};
+static int daysInMonth[] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
 // Names of the months
-static std::string conversionTable[] = {"Error", "January", "February",
-    "March", "April", "May", "June", "July", "August", "September",
-    "October", "November", "December"};
-
+static std::string conversionTable[] = { "Error", "January", "February",
+		"March", "April", "May", "June", "July", "August", "September",
+		"October", "November", "December" };
 
 //set the seed for random name generation
-static std::string randomNames[] = {"Viva", "Terrence", "Eusebla", "Cristie", "Linnie", "Mercy", "Chase", "Bennie", "Diego", "Rosaria", "Cayla",
-								"Sherril", "Matilde", "Wendell", "Lucas", "Ardath", "Myrna", "Luciana","Alexa", "Matthew", "Lavinia",
-								"Brunilda","Sofia", "Isabella", "Tianna", "Rosy", "Kirstie", "Isaac", "Lyndon", "Ashley", "Amanda",
-								"George", "James", "Lyndon", "Chanel", "Marva","Autumn", "Elsa", "Tyler", "Luke", "Jake", "Julian", "Bernice", "Domingo"
-								"Freddie", "Kay", "Hilda", "Courtney", "Arnold", "Wendell", "Rosalie", "Wayne", "Danielle", "Alex", "Camillia", "Kevin",
-								"Joe", "Charles", "Chance", "Olivia", "Torrin", "Kathryn", "Naoko", "Maura", "Hannah", "Nolan"};
-
-
-
+static std::string randomNames[] = { "Viva", "Terrence", "Eusebla", "Cristie",
+		"Linnie", "Mercy", "Chase", "Bennie", "Diego", "Rosaria", "Cayla",
+		"Sherril", "Matilde", "Wendell", "Lucas", "Ardath", "Myrna", "Luciana",
+		"Alexa", "Matthew", "Lavinia", "Brunilda", "Sofia", "Isabella",
+		"Tianna", "Rosy", "Kirstie", "Isaac", "Lyndon", "Ashley", "Amanda",
+		"George", "James", "Lyndon", "Chanel", "Marva", "Autumn", "Elsa",
+		"Tyler", "Luke", "Jake", "Julian", "Bernice", "Domingo"
+				"Freddie", "Kay", "Hilda", "Courtney", "Arnold", "Wendell",
+		"Rosalie", "Wayne", "Danielle", "Alex", "Camillia", "Kevin", "Joe",
+		"Charles", "Chance", "Olivia", "Torrin", "Kathryn", "Naoko", "Maura",
+		"Hannah", "Nolan" };
 
 /**
  * Default Constructor
@@ -86,19 +78,16 @@ static std::string randomNames[] = {"Viva", "Terrence", "Eusebla", "Cristie", "L
  * Data Members: month, day, name, year, birthdayDays,age
  * Member Functions: rand()
  */
-BirthDate::BirthDate(){
+BirthDate::BirthDate() {
 
 	month = rand() % 12 + 1;
 	day = rand() % daysInMonth[month] + 1;
 	name = randomNames[rand() % 30];
-	year = rand() % (2021-1930) + 1920;
+	year = rand() % (2021 - 1930) + 1920;
 	birthdayDays = this->birthDayInDays();
 	age = this->calculateAge();
 
 }
-
-
-
 
 /**
  * Initialized Constructor by User
@@ -108,7 +97,8 @@ BirthDate::BirthDate(){
  * Data Members: day, month, year, name, birthdayDays, age, DayOfYears
  * Member Functions: rand(), birthDayInDays(), calculateAge()
  */
-BirthDate::BirthDate(std::string first_name, int newMonth, int newDay, int newYear){
+BirthDate::BirthDate(std::string first_name, int newMonth, int newDay,
+		int newYear) {
 
 	day = newDay;
 	month = newMonth;
@@ -119,7 +109,6 @@ BirthDate::BirthDate(std::string first_name, int newMonth, int newDay, int newYe
 
 }
 
-
 /**
  * Returns birthday in days from Jan. 1st
  *
@@ -128,22 +117,20 @@ BirthDate::BirthDate(std::string first_name, int newMonth, int newDay, int newYe
  * Data Members: month, daysInMonth, day, year
  * Member Functions:N/A
  */
-int BirthDate::birthDayInDays(){
+int BirthDate::birthDayInDays() {
 	//Assume date is 05/31/2021
 
 	int daysSinceBirthDay = 0;
-    for(int i = 0;i < month;i++){
+	for (int i = 0; i < month; i++) {
 
-        daysSinceBirthDay += daysInMonth[i];
+		daysSinceBirthDay += daysInMonth[i];
 	}
 
-	daysSinceBirthDay = daysSinceBirthDay + day + (year - 1920)*365;
+	daysSinceBirthDay = daysSinceBirthDay + day + (year - 1920) * 365;
 
 	return daysSinceBirthDay;
 
 }
-
-
 
 /**
  * Calculates age of person
@@ -153,18 +140,15 @@ int BirthDate::birthDayInDays(){
  * Data Members:daysInMonth,birthdayDays
  * Member Functions:N/A
  */
-int BirthDate::calculateAge(){
+int BirthDate::calculateAge() {
 	//Assume date is 05/31/2021
 
-	int current_inDays = 31 + daysInMonth[1] + daysInMonth[2] + daysInMonth[3] + daysInMonth[4] + daysInMonth[5] + ((2021-1920)*365);
+	int current_inDays = 31 + daysInMonth[1] + daysInMonth[2] + daysInMonth[3]
+			+ daysInMonth[4] + daysInMonth[5] + ((2021 - 1920) * 365);
 
-	return (current_inDays - birthdayDays)/365;
+	return (current_inDays - birthdayDays) / 365;
 
 }
-
-
-
-
 
 /**
  * Month getter
@@ -174,11 +158,9 @@ int BirthDate::calculateAge(){
  * Data Members:month
  * Member Functions:N/A
  */
-int BirthDate::getMonth() const
-{
-   return month;
+int BirthDate::getMonth() const {
+	return month;
 }
-
 
 /**
  * Returns Month as String
@@ -188,12 +170,9 @@ int BirthDate::getMonth() const
  * Data Members:month,conversionTable
  * Member Functions:N/A
  */
-std::string BirthDate::getMonthAsString() const
-{
-  return conversionTable[month];
+std::string BirthDate::getMonthAsString() const {
+	return conversionTable[month];
 }
-
-
 
 /**
  * Year getter
@@ -203,11 +182,9 @@ std::string BirthDate::getMonthAsString() const
  * Data Members:year
  * Member Functions:N/A
  */
-int BirthDate::getYear() const
-{
-  return year;
+int BirthDate::getYear() const {
+	return year;
 }
-
 
 /**
  * Day getter
@@ -217,11 +194,9 @@ int BirthDate::getYear() const
  * Data Members:day
  * Member Functions:N/A
  */
-int BirthDate::getDay() const
-{
-  return day;
+int BirthDate::getDay() const {
+	return day;
 }
-
 
 /**
  * Age getter
@@ -231,12 +206,9 @@ int BirthDate::getDay() const
  * Data Members:age
  * Member Functions:N/A
  */
-int BirthDate::getAge() const
-{
-  return age;
+int BirthDate::getAge() const {
+	return age;
 }
-
-
 
 /**
  * Name getter
@@ -246,11 +218,9 @@ int BirthDate::getAge() const
  * Data Members:name
  * Member Functions:N/A
  */
-std::string BirthDate::getName() const
-{
-  return name;
+std::string BirthDate::getName() const {
+	return name;
 }
-
 
 /**
  * Overloaded == operator
@@ -260,15 +230,13 @@ std::string BirthDate::getName() const
  * Data Members:N/A
  * Member Functions:getDay(), getMonth(), getYear()
  */
-bool BirthDate::operator== (const BirthDate & obj) const
-		{
-			if((getDay() == obj.getDay()) and (getMonth() == obj.getMonth()) and (getYear() == obj.getYear())){
-				return true;
-			}
-			else
-				return false;
-		}
-
+bool BirthDate::operator==(const BirthDate &obj) const {
+	if ((getDay() == obj.getDay()) and (getMonth() == obj.getMonth())
+			and (getYear() == obj.getYear())) {
+		return true;
+	} else
+		return false;
+}
 
 /**
  * Overloaded != operator
@@ -278,17 +246,16 @@ bool BirthDate::operator== (const BirthDate & obj) const
  * Data Members:N/A
  * Member Functions:getDay(), getMonth(), getYear()
  */
-bool BirthDate::operator!= (const BirthDate &obj) const{
-    {
+bool BirthDate::operator!=(const BirthDate &obj) const {
+	{
 
-		if((getDay() == obj.getDay()) and (getMonth() == obj.getMonth()) and (getYear() == obj.getYear())){
+		if ((getDay() == obj.getDay()) and (getMonth() == obj.getMonth())
+				and (getYear() == obj.getYear())) {
 			return false;
-		}
-		else
+		} else
 			return true;
 	}
 }
-
 
 /**
  * Copy Constructor
@@ -298,7 +265,7 @@ bool BirthDate::operator!= (const BirthDate &obj) const{
  * Data Members:day, month, year, birthdayDays, name, age
  * Member Functions:N/A
  */
-BirthDate::BirthDate(const BirthDate & anotherBirthDate){
+BirthDate::BirthDate(const BirthDate &anotherBirthDate) {
 
 	day = anotherBirthDate.day;
 	month = anotherBirthDate.month;
@@ -307,11 +274,7 @@ BirthDate::BirthDate(const BirthDate & anotherBirthDate){
 	name = anotherBirthDate.name;
 	age = anotherBirthDate.age;
 
-
-
-
 }
-
 
 /**
  * overloaded << operator. Prints the BirthDate object to the screen
@@ -321,16 +284,15 @@ BirthDate::BirthDate(const BirthDate & anotherBirthDate){
  * Data Members: N/A
  * Member Functions:GetName(), GetDay(), GetYear(), GetAge()
  */
-std::ostream& operator<<(std::ostream& out, const BirthDate &obj){
+std::ostream& operator<<(std::ostream &out, const BirthDate &obj) {
 
-	out << "Hi, my name is " << obj.getName() << "!" ;
-	out << " My Birthday is "   << obj.getMonth() << "/" << obj.getDay() << "/" << obj.getYear();
+	out << "Hi, my name is " << obj.getName() << "!";
+	out << " My Birthday is " << obj.getMonth() << "/" << obj.getDay() << "/"
+			<< obj.getYear();
 	out << " and I am " << obj.getAge() << " years old." << std::endl;
 
 	return out;
 }
-
-
 
 /**
  * Calculate how many days a BirthDate is from Jan. 1st. Used as the index of the hash table.
@@ -340,12 +302,11 @@ std::ostream& operator<<(std::ostream& out, const BirthDate &obj){
  * Data Members: N/A
  * Member Functions:GetName(), GetDay(), GetYear(), GetAge()
  */
-size_t calcDayOfYear(const BirthDate& obj){
+size_t calcDayOfYear(const BirthDate &obj) {
 
-	int daysInYear=0;
+	int daysInYear = 0;
 
-	for(int i = 0;i <obj.getMonth();i++){
-
+	for (int i = 0; i < obj.getMonth(); i++) {
 
 		daysInYear += daysInMonth[i];
 
@@ -365,24 +326,15 @@ size_t calcDayOfYear(const BirthDate& obj){
  * Member Functions:calcDayOfYear()
  */
 template<>
-class Hash<BirthDate>
-{
+class Hash<BirthDate> {
 public:
-	size_t operator() (const  BirthDate& obj ) const
-	{
+	size_t operator()(const BirthDate &obj) const {
 		size_t index = 0;
 		index = calcDayOfYear(obj);
 		return index;
 		std::cout << "index being returned: " << index << std::endl;
 	}
 
-
 };
-
-
-
-
-
-
 
 #endif /* SRC_BIRTHDATE_H_ */

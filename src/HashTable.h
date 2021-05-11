@@ -15,28 +15,28 @@
 template<typename T>
 class HashTable {
 public:
-    explicit HashTable(int hashTableSize = 11); 
-    bool contains(const T& obj) const;
-    bool insert(const T& obj);
-    bool remove(const T& obj);
-    void makeEmpty();
-    int getSize() const;
-    bool isEmpty();
-    float loadFactor() const;
-    int findCollisions() const;
-    template<class U>
-    friend std::ostream& operator<<(std::ostream& out,  const HashTable<U>& ht);
+	explicit HashTable(int hashTableSize = 11);
+	bool contains(const T &obj) const;
+	bool insert(const T &obj);
+	bool remove(const T &obj);
+	void makeEmpty();
+	int getSize() const;
+	bool isEmpty();
+	float loadFactor() const;
+	int findCollisions() const;
+	template<class U>
+	friend std::ostream& operator<<(std::ostream &out, const HashTable<U> &ht);
 
-    HashTableIterator<T> begin();
-    HashTableIterator<T> end();
+	HashTableIterator<T> begin();
+	HashTableIterator<T> end();
 
 private:
-    std::vector<std::list<T>> hashTable;
-    int size; 
-    void rehash();
-    size_t hashFunction(const T& obj) const;
-    int nextPrime(int num);
-    bool isPrime(int num);
+	std::vector<std::list<T>> hashTable;
+	int size;
+	void rehash();
+	size_t hashFunction(const T &obj) const;
+	int nextPrime(int num);
+	bool isPrime(int num);
 
 };
 
@@ -45,11 +45,11 @@ private:
  * Post: size_t representing hashed index is returned. State of Hashtable is unchanged
  * Data Members: hashTable
  * Member Functions: N/A
- */ 
+ */
 template<typename T>
-size_t HashTable<T>::hashFunction(const T& obj) const {
-    static Hash<T> myHF;
-    return myHF(obj) % hashTable.size();
+size_t HashTable<T>::hashFunction(const T &obj) const {
+	static Hash<T> myHF;
+	return myHF(obj) % hashTable.size();
 }
 
 /**
@@ -57,18 +57,18 @@ size_t HashTable<T>::hashFunction(const T& obj) const {
  * Post: HashTable is initialized with prime number for table size
  * Data Members: size, hashTable
  * Member Functions: isPrime, nextPrime
- */ 
+ */
 template<typename T>
-HashTable<T>::HashTable(int hashTableSize) 
-: size{0}
-{
-    if(hashTableSize < 1)
-        throw std::underflow_error("Error Usage: HashTable size must be greater than 0");
+HashTable<T>::HashTable(int hashTableSize) :
+		size { 0 } {
+	if (hashTableSize < 1)
+		throw std::underflow_error(
+				"Error Usage: HashTable size must be greater than 0");
 
-    if(isPrime(hashTableSize))
-        hashTable.resize(hashTableSize);
-    else
-        hashTable.resize(nextPrime(hashTableSize));    
+	if (isPrime(hashTableSize))
+		hashTable.resize(hashTableSize);
+	else
+		hashTable.resize(nextPrime(hashTableSize));
 }
 
 /**
@@ -76,15 +76,14 @@ HashTable<T>::HashTable(int hashTableSize)
  * Post: returns whether object is in or not in the table
  * Data Members: hashTable
  * Member Functions: hashFunction
- */ 
+ */
 template<typename T>
-bool HashTable<T>::contains(const T& obj) const {
+bool HashTable<T>::contains(const T &obj) const {
 
-    auto location = hashTable[hashFunction(obj)];
-    return  (std::find(location.begin(), location.end(), obj) != location.end());
+	auto location = hashTable[hashFunction(obj)];
+	return (std::find(location.begin(), location.end(), obj) != location.end());
 
 }
-
 
 /**
  * Pre: HashTable is initialized.
@@ -93,10 +92,10 @@ bool HashTable<T>::contains(const T& obj) const {
  * Member Functions:  N/A
  */
 template<typename T>
-int HashTable<T>::findCollisions() const{
+int HashTable<T>::findCollisions() const {
 	int collisions = 0;
-	for (auto row: this->hashTable){
-		if(row.size()>1){
+	for (auto row : this->hashTable) {
+		if (row.size() > 1) {
 			collisions++;
 		}
 	}
@@ -108,16 +107,16 @@ int HashTable<T>::findCollisions() const{
  * Post: The table may (see returned boolean) have the item inserted.
  * Data Members: hashTable, size
  * Member Functions: hashFunction
- */ 
+ */
 template<typename T>
-bool HashTable<T>::insert(const T& obj) {
+bool HashTable<T>::insert(const T &obj) {
 	size_t index = this->hashFunction(obj);
 	//std::cout << index << std::endl;
 	try {
 		this->hashTable.at(index).push_front(obj);
 		size += 1;
 		return true;
-	} catch (std::exception const& e) {
+	} catch (std::exception const &e) {
 		return false;
 	}
 }
@@ -130,15 +129,15 @@ bool HashTable<T>::insert(const T& obj) {
  *
  * remove_if courtesy of: https://en.cppreference.com/w/cpp/container/list/remove
  * lambda courtesy of: https://docs.microsoft.com/en-us/cpp/cpp/lambda-expressions-in-cpp
- */ 
+ */
 template<typename T>
-bool HashTable<T>::remove(const T& obj) {
+bool HashTable<T>::remove(const T &obj) {
 	int removed = 0;
 	// remove ALL items matching the description
-	for (auto& row : this->hashTable) {
-		row.remove_if([&obj, &removed](T item){
+	for (auto &row : this->hashTable) {
+		row.remove_if([&obj, &removed](T item) {
 			bool match = item == obj;
-			if (match){
+			if (match) {
 				removed += 1;
 			}
 			return match;
@@ -153,13 +152,13 @@ bool HashTable<T>::remove(const T& obj) {
  * Post: The list is empty.
  * Data Members: hashTable, size.
  * Member Functions: Makes the list Empty.
- */ 
+ */
 template<typename T>
 void HashTable<T>::makeEmpty() {
-   size = 0;
-   for(int i = 0; i < hashTable.size(); i++){
-	 hashTable.clear(); 
-   }
+	size = 0;
+	for (int i = 0; i < hashTable.size(); i++) {
+		hashTable.clear();
+	}
 }
 
 /**
@@ -167,7 +166,7 @@ void HashTable<T>::makeEmpty() {
  * Post: state is unchanged. Returns number of elements currently in the HashTable
  * Data Members: size
  * Member Functions: N/A
- */ 
+ */
 template<typename T>
 int HashTable<T>::getSize() const {
 	return size;
@@ -178,7 +177,7 @@ int HashTable<T>::getSize() const {
  * Post: state is unchanged. Returns true if size is zero and false otherwise
  * Data Members: size 
  * Member Functions: N/A
- */ 
+ */
 template<typename T>
 bool HashTable<T>::isEmpty() {
 	return size == 0;
@@ -189,35 +188,35 @@ bool HashTable<T>::isEmpty() {
  * Post: The table size is expanded and all items are hashed to new locations.
  * Data Members: size, hashTable
  * Member Functions: hashFunction
- */ 
+ */
 template<typename T>
 void HashTable<T>::rehash() {
 	// construct new hashTable
-    std::vector<std::list<T>> newHashTable;
+	std::vector<std::list<T>> newHashTable;
 
-    // figure out next prime after doubling
-    int newSize = 0;
-    try {
-    	newSize = this->nextPrime(this->size * 2);
-    } catch (std::overflow_error& e) {
-    	newSize = this->size; // what's a better fallback in this case? just below INT_MAX?
-    }
+	// figure out next prime after doubling
+	int newSize = 0;
+	try {
+		newSize = this->nextPrime(this->size * 2);
+	} catch (std::overflow_error &e) {
+		newSize = this->size; // what's a better fallback in this case? just below INT_MAX?
+	}
 
-    // resize to new doubled data structure
-    newHashTable.resize(newSize);
+	// resize to new doubled data structure
+	newHashTable.resize(newSize);
 
-    // rehash all items
-    for (auto row : this->hashTable) {
-    	for (auto item : row) {
-    		int hash = this->hashFunction(item);
-    		// this will preserve the order if any of these stay in similar buckets
-    		newHashTable[hash].push_back(item);
-    	}
-    }
+	// rehash all items
+	for (auto row : this->hashTable) {
+		for (auto item : row) {
+			int hash = this->hashFunction(item);
+			// this will preserve the order if any of these stay in similar buckets
+			newHashTable[hash].push_back(item);
+		}
+	}
 
-    // finally, delete old table and point to new table
-    delete this->hashTable; // I don't need to do this manually, do I?
-    this->hashTable = newHashTable;
+	// finally, delete old table and point to new table
+	delete this->hashTable; // I don't need to do this manually, do I?
+	this->hashTable = newHashTable;
 }
 
 /**
@@ -235,7 +234,7 @@ float HashTable<T>::loadFactor() const {
 	int numSlots = this->hashTable.size();
 	// calculate N (total items in table) / M (number of slots)
 	int sum = 0;
-	for (auto& row : this->hashTable)
+	for (auto &row : this->hashTable)
 		sum += row.size();
 	return static_cast<float>(sum) / numSlots;
 }
@@ -247,8 +246,8 @@ float HashTable<T>::loadFactor() const {
  * Member Functions:
  */
 template<typename T>
-HashTableIterator<T> HashTable<T>::begin(){
-	return HashTableIterator<T> { this->hashTable, /* is end */ false};
+HashTableIterator<T> HashTable<T>::begin() {
+	return HashTableIterator<T> { this->hashTable, /* is end */false };
 }
 
 /**
@@ -258,8 +257,8 @@ HashTableIterator<T> HashTable<T>::begin(){
  * Member Functions:
  */
 template<typename T>
-HashTableIterator<T> HashTable<T>::end(){
-	return HashTableIterator<T>{ this->hashTable, /* is end */ true };
+HashTableIterator<T> HashTable<T>::end() {
+	return HashTableIterator<T> { this->hashTable, /* is end */true };
 }
 
 /**
@@ -269,12 +268,12 @@ HashTableIterator<T> HashTable<T>::end(){
  * Member Functions:
  */
 template<typename U>
-std::ostream& operator<<(std::ostream& out, const HashTable<U> &ht){
+std::ostream& operator<<(std::ostream &out, const HashTable<U> &ht) {
 
 	/*
-	 	 This really doesn't work well for larger HashTables.
-	 	 Suggest we trim this a bit :)
-	 	 Although it'll break some tests...
+	 This really doesn't work well for larger HashTables.
+	 Suggest we trim this a bit :)
+	 Although it'll break some tests...
 	 */
 
 	out << "HashTable [" << std::endl;
@@ -296,14 +295,14 @@ std::ostream& operator<<(std::ostream& out, const HashTable<U> &ht){
  * Post: returns prime number or throws exception. State of HashTable is not changed
  * Data Members: N/A
  * Member Functions: isPrime
- */ 
+ */
 template<typename T>
 int HashTable<T>::nextPrime(int num) {
-    while(++num < INT_MAX) 
-        if(isPrime(num))
-            return num;
-    
-    throw std::overflow_error("overflow: nextPrime greater than INT_MAX");
+	while (++num < INT_MAX)
+		if (isPrime(num))
+			return num;
+
+	throw std::overflow_error("overflow: nextPrime greater than INT_MAX");
 }
 
 /**
@@ -311,22 +310,22 @@ int HashTable<T>::nextPrime(int num) {
  * Post: returns true if number is prime and false otherwise
  * Data Members: N/A
  * Member Functions: N/A
- */  
+ */
 template<typename T>
 bool HashTable<T>::isPrime(int num) {
-    if(num == 2)
-        return true;
+	if (num == 2)
+		return true;
 
-    if(num % 2 == 0 || num < 3)    
-        return false;
+	if (num % 2 == 0 || num < 3)
+		return false;
 
-    int sqrtOfNum = std::sqrt(num);
+	int sqrtOfNum = std::sqrt(num);
 
-    for(int i = 3; i <= sqrtOfNum; i += 2)
-        if(num % i == 0)
-            return false;
-    
-    return true;
+	for (int i = 3; i <= sqrtOfNum; i += 2)
+		if (num % i == 0)
+			return false;
+
+	return true;
 }
 
 #endif /* HASHTABLE_H */
