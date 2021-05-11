@@ -5,15 +5,15 @@
 
 #include "DriveStrategy.h"
 
-class FrontWheelDrive : public DriveStrategy {
+class FrontWheelDrive: public DriveStrategy {
 public:
-    void drive() const override {
-        std::cout << "Driving with front wheel drive";
-    }
+	void drive() const override {
+		std::cout << "Driving with front wheel drive";
+	}
 
-    FrontWheelDrive* clone() const override {
-        return new FrontWheelDrive;
-    }
+	FrontWheelDrive* clone() const override {
+		return new FrontWheelDrive;
+	}
 };
 
 #endif

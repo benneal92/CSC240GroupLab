@@ -15,7 +15,7 @@ class Hash<int> {
 public:
 	size_t operator()(const int &n) {
 		// Knuth's multiplicative method: https://stackoverflow.com/a/665545
-		return (n * 2654435761) % (int)std::pow(2, 32);
+		return (n * 2654435761) % (int) std::pow(2, 32);
 	}
 };
 

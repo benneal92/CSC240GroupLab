@@ -1,6 +1,23 @@
+/******************************
+ Erin Middlemas, Noura Almasri, Ben Neal, Benjamin Liden
+ 05/11/2021
+
+ This program tests iterating over the HashTable object and simulates the Birthday Paradox with the HashTable object.
+
+ Input: For simulateBirthDayParadox, number of random people to put into hash table.
+
+ Output: For simulateBirthDayParadox, the calculated and simulated probability are returned
+
+ Given: For the simulatedBirthDayParadox, if the number of people entered is 30, this can be the result printed to the terminal:
+
+ Calculated Probability: 0.696816
+ Simulated Probability: 0.7067
+
+ This means there is a 30% chance 2 people in the classroom have the same birthday.
+
+ ******************************/
+
 #include <iostream>
-#include <sstream>
-#include <cassert>
 #include <math.h>
 
 #include "HashTable.h"
@@ -9,33 +26,21 @@
 #include "RearWheelDrive.h"
 #include "AllWheelDrive.h"
 #include "Car.h"
-
-// test declarations
-void testInsert();
-void testRemove();
-void testRemoveMultiple();
-void testLoadFactor();
-void testIterator();
-void testEmptyIterator();
-void testIteratorWithEmptyBeginPosition();
+#include "TestSuite.h"
 
 //simulation declaration
 
+void runBirthdayParadoxCLI();
 void simulateBirthdayParadox(int numberOfPeople);
 
 int main() {
+	Test::runAll();
+	runBirthdayParadoxCLI();
+	return 0;
+}
 
+void runBirthdayParadoxCLI() {
 	int numberPeople;
-
-//	testInsert();
-//	testRemove();
-//	testRemoveMultiple();
-//	testLoadFactor();
-//	testIterator();
-//	testEmptyIterator();
-//	testIteratorWithEmptyBeginPosition();
-//	std::cout << "Tests ran finished without error 🍕" << std::endl;
-//	std::cout << std::endl;
 	std::cout << "Let's run a Birthday Paradox Simulator!" << std::endl;
 	std::cout
 			<< "In a classroom of students what is the chance you will have the same birthday as someone else??"
@@ -47,10 +52,16 @@ int main() {
 	std::cin >> numberPeople;
 
 	simulateBirthdayParadox(numberPeople);
-
-	return 0;
 }
 
+/**
+ * Calculate the likelihood someone in a classroom with n students  has the same birthday.
+ *
+ * Pre:numberOfPeople given as input from the terminal
+ * Post:returns the actual probability calculated by the N choose K function and a simulated value utilizing the groups hash table separate chaining implementation
+ * Data Members: probability, actualProb, CollisionFound, HashTable ht, BirthDate person (reinitialized over and over again randomly)
+ * Member Functions:insert() (HashTable), findCollisions() (HashTable)
+ */
 void simulateBirthdayParadox(int numberOfPeople) {
 
 	srand(time(0));
@@ -59,7 +70,7 @@ void simulateBirthdayParadox(int numberOfPeople) {
 			- ((pow((364 / 365.0),
 					(numberOfPeople * (numberOfPeople - 1)) / 2.0)));
 	int CollisionFound = 0;
-	for (int i = 0; i <= 10000; i++) {
+	for (int i = 0; i < 10000; i++) {
 		HashTable<BirthDate> ht(365);
 		for (int i = 0; i < numberOfPeople; i++) {
 			BirthDate person;
@@ -93,160 +104,6 @@ void simulateBirthdayParadox(int numberOfPeople) {
 			<< "The Birthday Paradox illustrates how you don't need a large number of items before there is a likely chance there will be a collision. "
 			<< std::endl;
 
-}
-
-/*
- * Does it insert items?
- */
-void testInsert() {
-	std::stringstream testLog;
-	std::string const matcher =
-			R"(HashTable [
-0>> 0, 
-1>> 
-2>> 9, 6, 3, 
-3>> 
-4>> 
-5>> 5, 2, 
-6>> 
-7>> 8, 
-8>> 1, 
-9>> 
-10>> 7, 4, 
-] 
-)";
-
-	HashTable<int> ht;
-	for (int i = 0; i < 10; i++) {
-		ht.insert(i);
-	}
-	testLog << ht;
-
-	assert(matcher == testLog.str());
-}
-
-/*
- * Does it remove one item?
- */
-void testRemove() {
-	std::stringstream testLog;
-
-	HashTable<int> ht;
-	ht.insert(1);
-	ht.insert(2);
-	ht.insert(3);
-	ht.remove(2);
-	testLog << ht;
-
-	std::string const expected =
-			R"(HashTable [
-0>> 
-1>> 
-2>> 3, 
-3>> 
-4>> 
-5>> 
-6>> 
-7>> 
-8>> 1, 
-9>> 
-10>> 
-] 
-)";
-	assert(expected == testLog.str());
-}
-
-/*
- * Does it remove multiple of the same item?
- */
-void testRemoveMultiple() {
-	std::stringstream ss;
-	HashTable<int> ht;
-	for (int i = 0; i < 15; i++) {
-		ht.insert(i);
-	}
-	for (int i = 0; i < 15; i++) {
-		ht.insert(i);
-	}
-	ht.remove(7);
-	ht.remove(11);
-	ss << ht;
-
-	std::string expected =
-			R"(HashTable [
-0>> 0, 0, 
-1>> 
-2>> 9, 6, 3, 9, 6, 3, 
-3>> 
-4>> 12, 12, 
-5>> 5, 2, 5, 2, 
-6>> 
-7>> 14, 8, 14, 8, 
-8>> 1, 1, 
-9>> 
-10>> 13, 10, 4, 13, 10, 4, 
-] 
-)";
-	assert(expected == ss.str());
-}
-
-/*
- * Does it calculate the load factor correctly?
- */
-void testLoadFactor() {
-	std::stringstream ss;
-	HashTable<int> ht;
-	for (int i = 0; i < 15; i++) {
-		ht.insert(i);
-	}
-	ss << ht.loadFactor(); // 15 / 11 = 1.363364
-	assert(ss.str() == "1.36364");
-}
-
-/*
- * Does it correctly iterate a full list?
- */
-void testIterator() {
-	std::stringstream ss;
-	HashTable<int> ht;
-	for (int i = 0; i < 15; i++) {
-		ht.insert(i);
-	}
-	for (auto &item : ht) {
-		ss << item << ',';
-	}
-	std::string expected = R"(0,9,6,3,12,5,2,14,11,8,1,13,10,7,4,)";
-	assert(expected == ss.str());
-}
-
-/*
- * Will the iterator be fine if no items are added?
- */
-void testEmptyIterator() {
-	std::stringstream ss;
-	HashTable<int> ht;
-	// add NO items at all
-	for (auto &item : ht) {
-		ss << item << ',';
-	}
-	std::string expected = "";
-	assert(expected == ss.str()); // nothing printed. Correct!
-}
-
-/*
- * Will the iterator find the first good item?
- */
-void testIteratorWithEmptyBeginPosition() {
-	std::stringstream ss;
-	HashTable<int> ht;
-	ht.insert(5);
-	ht.insert(5);
-	ht.insert(5);
-
-	auto iterator = ht.begin();
-	coords expected { 5, 0 }; // iterator should automatically seek to first 5
-
-	assert(iterator.position == expected);
 }
 
 /*
