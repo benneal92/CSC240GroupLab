@@ -1,14 +1,3 @@
-Todo:
-Iterator - Benjamin Liden
-Rehash - Benjamin Liden
-insert - Benjamin Liden
-
-BirthdayObj - Erin Middlemas
-getItem - Erin Middlemas
-contains - Erin Middlemas
-
-
-Done:
 04/20/2021 
 Created discord server to communicate and prepare for group project
 
@@ -25,8 +14,6 @@ isPrime and nextPrime - Ben Neal
 
 05/03/2021
 Ben Neal and Erin discussed issues with getItem method for hashtable- Zoom Meeting
-
-
 
 05/05/2021 
 Ben, Ben, and Noura discussed clear(), Car object, and iterators
