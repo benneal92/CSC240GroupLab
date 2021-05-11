@@ -55,3 +55,6 @@ Erin created findCollisions in the hash table
 Erin documented BirthDate.h, simulateBirthdayParadox(), contains(), and findCollisions() function
 
 Erin tweaked simulateBirthdayParadox()
+
+05/11/2021
+Team updates readme to address assignment topics
