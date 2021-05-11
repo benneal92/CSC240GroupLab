@@ -92,7 +92,7 @@ We can generalize the Birthday Paradox to hashing and the importance of dealing 
 
 The simulateBirthdayParadox function within the Driver simulates the probability of there being a collision of birthdays in a hash table. The function uses a Birthdate object and the HashTable objects our team has developed. To effectively simulate the Birthday Paradox, the BirthDate object does not call the actual hash function - instead the day in the year of the birthday (from Jan. 1st) is returned to emulate people having their birthdays on the same day. The simulateBrithdayParadox function gets a number of people from the user and then outputs the **actual** probability and **simulated** probability (randomly generating **n** BirthDate objects, putting these birthdays in a hashtable, and running 1000 times).
 
-# BirthDate
+### BirthDate
 
 The BirthDate class also includes many concepts in c++ programming, including operator overloading, random number generation, and handling of dates. The class includes getters, a copy constructor and a friend function that overloads the ostream operator.
 
