@@ -83,6 +83,10 @@ Depending on the object passed we can expect different behavior from our Car obj
 
 ## Birthday Paradox
 
+The simulatedBirthdayParadox function shows the importance of dealing with collisions within a hashtable. In a group of n people, what is the probability that two people have the same birthday? People think that the chances of someone having the same birthday increase linearly with the amount of people, however this is not the case. The actual probability increases exponentially:
+
+x<sup>x+1</sup>
+
 # Outcome of Project
 
 From the start of the assignment, we encouraged each member to make the success of the project a shared responsibility and a team effort. We created a discord server to communicate and frequently used Zoom to meet digitally. Every team member was responsive and helpful in each stage of the assignment. 
