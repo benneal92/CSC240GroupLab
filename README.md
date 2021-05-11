@@ -9,6 +9,8 @@ The program itself will provide the following public member functions that are e
 ## Usage
 
 
+## HashTable
+
     explicit HashTable(int hashTableSize = 11); 
     bool contains(const T& obj) const;
     bool insert(const T& obj);
@@ -57,6 +59,9 @@ isEmpty will return true if the current number of items in the Hash Table is zer
 ###  int findCollisions() const;
 
 findCollision will return the number of collisions that have occured so far in the Hash Table. The state of the Hash Table is not changed from this function call.
+
+
+## Hash
 
 
 
