@@ -6,7 +6,7 @@ The goal of the project is to create a Hash Table that can handle different obje
 The program itself will provide the following public member functions that are expected to be both accurate and efficient in their execution.
 
 
-## Usage
+# Usage
 
 
 ## HashTable
@@ -63,6 +63,7 @@ findCollision will return the number of collisions that have occured so far in t
 
 ## Hash
 
+The Hash class is where we define our Hash function. The templated class is known as a functor because the main behavior of the class is being used as a hash function itself. The approach is to simply define a member function of the class that overrides the operator() behavior. In our main hash class, this function is only defined and then overridden for particular template arguments. We chose to include the Hash header in the header file of the class we need to implement the particular hash function in.
 
 
 ## Car 
