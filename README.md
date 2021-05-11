@@ -79,7 +79,22 @@ Depending on the object passed we can expect different behavior from our Car obj
 
 ## Outcome of Project
 
+From the start of the assignment, we encouraged each member to make the success of the project a shared responsibility and a team effort. We created a discord server to communicate and frequently used Zoom to meet digitally. Every team member was responsive and helpful in each stage of the assignment. 
 
+The goal of the project was to create a Separate Chained Hash Table and to cover C++ programming concepts we each found interesting. Because of this open goal, our project captures many diverse perspectives of using a Hash Table. 
+
+By the rubric of learning and teamwork, the project exceeded early expectations. The Data structure was properly implemented and many deeper concepts explored. Team members assisted each other in design, debugging, and environment setup.
+
+The lessons learned throughout the process facilitated a better understanding of Hashing. One area the team encountered was the benefits and limitations of using the data members of each class as the key. 
+
+In our implementation of the Hash Table, the class only takes an object and then does hashing directly based on the functor's implementation. Each function would look at the data members of the class to generate the hash.
+
+In other implementations frequently the HashTable class will take two template arguments for a key-value pair. The benefit is that searching and retrieving items are decoupled from the object itself.
+
+
+
+
+## Birthday Paradox
 
 ## Contributing Members
 
