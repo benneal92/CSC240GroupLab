@@ -26,9 +26,15 @@ isPrime and nextPrime - Ben Neal
 05/03/2021
 Ben Neal and Erin discussed issues with getItem method for hashtable- Zoom Meeting
 
+
+
 05/05/2021 
 Ben, Ben, and Noura discussed clear(), Car object, and iterators
 Ben L. pushed new loadFactor member function, rehash, and some iterator work.
+
+Erin pushed BirthDate up as object for the BirthDay Paradox.
+
+Erin created the contains function in HashTable.h
 
 05/07/2021
 Neal and Noura added rim spinners to the car class (Strategy Pattern for DriveBehavior)
@@ -37,3 +43,15 @@ Ben L: tests for insert, remove, loadFactor. First pass of iterator tests and bu
 05/08/2021
 Ben L: More iterator tests, fix more problematic behavior. Also add doc text to all methods.
 		+ some light formatting.
+
+Erin and Ben N. discussed storing the BirthDay objects in the hash table for the BirthDay Paradox Simulation
+
+Erin pushed simulateBirthDayParadox()
+
+Erin created findCollisions in the hash table
+
+05/10/2021
+
+Erin documented BirthDate.h, simulateBirthdayParadox(), contains(), and findCollisions() function
+
+Erin tweaked simulateBirthdayParadox()
