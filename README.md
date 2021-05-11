@@ -85,7 +85,7 @@ Depending on the object passed we can expect different behavior from our Car obj
 
 The simulatedBirthdayParadox function shows the importance of dealing with collisions within a hashtable. In a group of n people, what is the probability that two people have the same birthday? People think that the chances of someone having the same birthday increase linearly with the amount of people, however this is not the case. The actual probability increases exponentially:
 
-x<sup>x+1</sup>
+1 - (364&frasl;365)<sup>x+1</sup>
 
 # Outcome of Project
 
