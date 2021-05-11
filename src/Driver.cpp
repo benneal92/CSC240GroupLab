@@ -1,3 +1,24 @@
+/******************************
+Erin Middlemas, Noura Almasri, Ben Neal, Benjamin Liden
+05/11/2021
+
+This program tests iterating over the HashTable object and simulates the Birthday Paradox with the HashTable object.
+
+Input: For simulateBirthDayParadox, number of random people to put into hash table.
+
+Output: For simulateBirthDayParadox, the calculated and simulated probability are returned
+
+Given: For the simulatedBirthDayParadox, if the number of people entered is 30, this can be the result printed to the terminal:
+
+Calculated Probability: 0.696816
+Simulated Probability: 0.7067
+
+THis means there is a 30% chance 2 people in the classroom have the same birthday.
+
+
+
+******************************/
+
 #include <iostream>
 #include <sstream>
 #include <cassert>

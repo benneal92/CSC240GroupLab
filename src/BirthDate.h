@@ -54,8 +54,6 @@ private:
     int birthdayDays; // What day in the year is your birthday
 
 
-
-
 };
 
 
@@ -92,7 +90,6 @@ BirthDate::BirthDate(){
 
 	month = rand() % 12 + 1;
 	day = rand() % daysInMonth[month] + 1;
-
 	name = randomNames[rand() % 30];
 	year = rand() % (2021-1930) + 1920;
 	birthdayDays = this->birthDayInDays();
@@ -282,7 +279,7 @@ bool BirthDate::operator== (const BirthDate & obj) const
  * Member Functions:getDay(), getMonth(), getYear()
  */
 bool BirthDate::operator!= (const BirthDate &obj) const{
-	{
+    {
 
 		if((getDay() == obj.getDay()) and (getMonth() == obj.getMonth()) and (getYear() == obj.getYear())){
 			return false;
@@ -374,8 +371,6 @@ public:
 	size_t operator() (const  BirthDate& obj ) const
 	{
 		size_t index = 0;
-
-
 		index = calcDayOfYear(obj);
 		return index;
 		std::cout << "index being returned: " << index << std::endl;
