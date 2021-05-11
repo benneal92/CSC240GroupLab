@@ -76,6 +76,7 @@ When we instantiate a car object we pass a pointer to particular concrete implem
 
 Depending on the object passed we can expect different behavior from our Car object. This is an example of Polymorphism. The car object also has the necessary functions implemented to make it hashable and can be used with our separate chained Hash table data structure.
 
+## Birthday Paradox
 
 ## Outcome of Project
 
@@ -92,19 +93,19 @@ In our implementation of the Hash Table, the class only takes an object and then
 In other implementations frequently the HashTable class will take two template arguments for a key-value pair. The benefit is that searching and retrieving items are decoupled from the object itself.
 
 
-
-
-## Birthday Paradox
-
 ## Contributing Members
 
 Ben Neal
+- Car class, prime validations, project setup
 
 Benjamin Liden
+- HashTable Iterator, HashTable Member Functions
 
 Erin Middlemas
+- Birthday Paradox, HashTable Member Functions
 
 Noura Almasri
+- Car class, HashTable Member Functions
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
