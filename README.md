@@ -81,11 +81,23 @@ When we instantiate a car object we pass a pointer to particular concrete implem
 
 Depending on the object passed we can expect different behavior from our Car object. This is an example of Polymorphism. The car object also has the necessary functions implemented to make it hashable and can be used with our separate chained Hash table data structure.
 
+
 ## Birthday Paradox
 
-The simulatedBirthdayParadox function shows the importance of dealing with collisions within a hashtable. In a group of n people, what is the probability that two people have the same birthday? People think that the chances of someone having the same birthday increase linearly with the amount of people, however this is not the case. The actual probability increases exponentially:
+In a group of n people, what is the probability two people have the same birthday? People think that the chances of someone having the same birthday increase linearly with the amount of people, however this is not the case. The actual probability increases exponentially:
 
-1 - (364&frasl;365)<sup>x+1</sup>
+1 - (364 &frasl; 365)<sup>n(n-1) %fras1 2</sup>
+
+We can generalize the Birthday Paradox to hashing and the importance of dealing with collisions within a hashtable.Despite numbers having a random probability of occuring in a certain range, the probability that another number randomly generated will match that number is not a linear function. 
+
+The simulateBirthdayParadox function within the Driver simulates the probability of there being a collision of birthdays in a hash table. The function uses a Birthdate object and the HashTable objects our team has developed. To effectively simulate the Birthday Paradox, the BirthDate object does not call the actual hash function - instead the day in the year of the birthday (from Jan. 1st) is returned to emulate people having their birthdays on the same day. The simulateBrithdayParadox function gets a number of people from the user and then outputs the **actual** probability and **simulated** probability (randomly generating **n** BirthDate objects, putting these birthdays in a hashtable, and running 1000 times).
+
+# BirthDate
+
+The BirthDate class also includes many concepts in c++ programming, including operator overloading, random number generation, and handling of dates. The class includes getters, a copy constructor and a friend function that overloads the ostream operator.
+
+To make these objects more personable, a random name is generated with each birthday in the default constructor. The age of the person is also calculated as well, assuming that today's date is 05/31/2021 (to make calculations simpler).
+
 
 # Outcome of Project
 
