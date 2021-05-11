@@ -1,7 +1,9 @@
 # CSC240GroupLab
 
+The goal of the project is to create a Hash Table that can handle different objects and evenly distribute them throughout a vector. The focus is to reinforce programming concepts and excel in a team-oriented environment. For the data structure, the team chose to implement a Hash Table using Separate Chaining. This Data Structure was chosen since it explores many areas of computer science and provides a deeper understanding of Hashing. It also provided the opportunity to explore concepts around designing classes that are hashable. Each team member was given the freedom to take on work that they found interesting and we saw interest in Design Patterns, Iterators and member functions, and probability with the Birthday Paradox. All of these unique interests have a direct relation with Hashing as they enable unique functionality and cover different perspectives of using a Hash Table.
 
-The goal of the project is to create a Hash Table that can handle different objects and evenly distribute them throughout a vector. The focus is to reinforce programming concepts and excel in a team-oriented environment. The program itself will provide the following public member functions that are expected to be both accurate and efficient in their execution.
+
+The program itself will provide the following public member functions that are expected to be both accurate and efficient in their execution.
 
 
 ## Usage
@@ -68,6 +70,8 @@ When we instantiate a car object we pass a pointer to particular concrete implem
 
 Depending on the object passed we can expect different behavior from our Car object. This is an example of Polymorphis. The car object also has the necessary functions implemented to make it hashable and can be used with our separate chained Hash table data structure.
 
+
+## Outcome of Project
 
 
 
