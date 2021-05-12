@@ -1,7 +1,6 @@
 #include "Car.h"
 
-#include <typeinfo>
-#include <string>
+
 
 /**
  * Pre: Car is not initialized
