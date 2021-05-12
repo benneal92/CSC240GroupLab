@@ -11,7 +11,7 @@
  */
 Car::Car(int yearModel, int speed, std::string model, std::string brand,
 		DriveStrategy *drive) :
-		yearModel { yearModel }, speed { speed }, model { model }, brand { brand }, drive {
+		yearModel { yearModel }, speed { speed }, model ( model ), brand ( brand ), drive {
 				drive } {
 }
 
@@ -22,8 +22,8 @@ Car::Car(int yearModel, int speed, std::string model, std::string brand,
  * Member Functions: N/A
  */
 Car::Car(const Car &car) :
-		yearModel { car.yearModel }, speed { car.speed }, model { car.model }, brand {
-				car.brand }, drive { car.drive->clone() } {
+		yearModel { car.yearModel }, speed { car.speed }, model ( car.model ), brand (
+				car.brand ), drive { car.drive->clone() } {
 }
 
 /**
@@ -33,8 +33,8 @@ Car::Car(const Car &car) :
  * Member Functions: N/A
  */
 Car::Car(Car &&car) noexcept :
-		yearModel { std::move(car.yearModel) }, speed { std::move(car.speed) }, model {
-				std::move(car.model) }, brand { std::move(car.brand) }, drive {
+		yearModel { std::move(car.yearModel) }, speed { std::move(car.speed) }, model (
+				std::move(car.model) ), brand ( std::move(car.brand) ), drive {
 				std::move(car.drive->clone()) } {
 }
 
