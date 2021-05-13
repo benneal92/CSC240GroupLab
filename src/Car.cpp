@@ -1,7 +1,5 @@
 #include "Car.h"
 
-
-
 /**
  * Pre: Car is not initialized
  * Post: Car is initialized with values from parameters
