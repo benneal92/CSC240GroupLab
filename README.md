@@ -65,6 +65,34 @@ Load Factor is important concept in Hash Tables and gives insight into how full 
 
 findCollision will return the number of collisions that have occured so far in the Hash Table. The state of the Hash Table is not changed from this function call.
 
+## HashTableIterator
+
+	HashTableIterator();
+	HashTableIterator(std::vector<std::list<T>>&, bool);
+	T& operator*();
+	HashTableIterator<T>& operator++();
+	bool operator!=(const HashTableIterator<T> &it) const;
+	coords position;
+	
+## 	HashTableIterator(std::vector<std::list<T>>&, bool);
+The HashTableIterator class serves allows a naive user to visit every held node in the HashTable without knowing its internals.	
+This Iterator allows the class to be used in C++ STL ranged for loops. To use, simply `for (auto i : hashTableInstance){}` and access the inner items using `i`.
+
+Initially it is passed the underlying data structure and a boolean to signal a start or end position.
+
+### T& operator*();
+The dereference operator. This allows the item at the iterator's current position to be exposed to the user.
+
+### bool operator!=(const HashTableIterator<T> &it) const;
+The 'not equals' operator. Used to compare the positions of two iterators' positions. Most often used to compare a given iterator
+against an 'end' operator.
+
+### coords position;
+This set of row/column coordinates indicate the current position of the iterator against the backing data structure.
+ 
+###	HashTableIterator<T>& operator++();
+The prefix operator. This is used to step the iterator to the next available item in the structure.
+
 
 ## Hash
 
